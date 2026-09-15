@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, Loader2, Trash2, UserRound } from "lucide-react";
+import { Camera, Loader2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import defaultUserAvatar from "@/assets/default-user-avatar.jpg";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 
@@ -63,20 +64,18 @@ export function AvatarUploader({
     }
   }
 
-  const initials = name.trim().slice(0, 2) || "سه";
-
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div className="relative">
         <span className="grid size-20 place-items-center overflow-hidden rounded-full border border-border bg-secondary text-lg font-black">
-          {preview ? (
-            <img src={preview} alt={`صورة ${name || "المستخدم"}`} className="size-full object-cover" />
-          ) : (
-            <span className="flex flex-col items-center text-muted-foreground">
-              <UserRound className="size-6" />
-              <span className="text-xs font-bold">{initials}</span>
-            </span>
-          )}
+          <img
+            src={preview ?? defaultUserAvatar}
+            alt={preview ? `صورة ${name || "المستخدم"}` : "الصورة الافتراضية للمستخدم"}
+            loading="lazy"
+            width={1024}
+            height={1024}
+            className="size-full object-cover"
+          />
         </span>
         {busy ? (
           <span className="absolute inset-0 grid place-items-center rounded-full bg-background/70">

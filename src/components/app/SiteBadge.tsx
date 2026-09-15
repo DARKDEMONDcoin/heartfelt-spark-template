@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Globe, X, ArrowUpLeft } from "lucide-react";
+import { X, ArrowUpLeft } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import defaultWorkspace from "@/assets/default-workspace.jpg";
 
 const KEY = "sahl:site-badge-hidden";
 
@@ -20,9 +21,14 @@ export function SiteFavicon({ website, className }: { website: string; className
   const host = hostOf(website);
   if (failed) {
     return (
-      <span className={cn("grid place-items-center rounded-md bg-jade/12 text-jade-deep", className)}>
-        <Globe className="size-3.5" />
-      </span>
+      <img
+        src={defaultWorkspace}
+        alt="صورة مساحة العمل الافتراضية"
+        loading="lazy"
+        width={1024}
+        height={1024}
+        className={cn("rounded-md object-cover", className)}
+      />
     );
   }
   return (
