@@ -419,6 +419,7 @@ export const askEmployee = createServerFn({ method: "POST" })
       nowBlock(timezone),
       liveBlock,
       intentBlock(intent),
+      expertMindBlock(data.employeeId, intent),
       workspace.banned_words?.length
         ? `كلمات ممنوعة تماماً: ${workspace.banned_words.join("، ")}.`
         : "",
