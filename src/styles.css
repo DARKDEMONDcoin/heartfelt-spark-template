@@ -14881,7 +14881,7 @@ section:has(> .integration-grid-wave) {
 
 @media (max-width: 720px) {
   .sahl-shell, .sahl-white-nav-inner { width: min(100% - 32px,1180px); }
-  .sahl-section { padding-block: 82px; }
+  .sahl-section { padding-block: 66px; }
   .sahl-section-head { margin-bottom: 38px; }
   .sahl-section-head h2 { font-size: 2.45rem; }
   .sahl-section-head > p, .sahl-section-head > div + p { font-size: .95rem; }
@@ -14893,7 +14893,7 @@ section:has(> .integration-grid-wave) {
   .sahl-white-menu:hover, .sahl-white-menu:focus-visible { background: transparent !important; color: var(--home-ink) !important; }
   .sahl-white-menu svg { width: 25px; height: 25px; stroke-width: 2.4; }
   .sahl-white-mobile { inset-block-start: 82px; }
-  .sahl-hero { min-height: 1035px; padding: 0 0 76px; }
+  .sahl-hero { min-height: 0; padding: 0 0 64px; }
   .sahl-hero-ribbon { inset: -95px -160px auto 28%; height: 600px; transform: skewX(-18deg) rotate(-10deg); animation-name: sahl-ribbon-drift-mobile; }
   @keyframes sahl-ribbon-drift-mobile {
     0% { transform: skewX(-18deg) rotate(-10deg) translate3d(-2%, -1%, 0) scale(1.02); }
