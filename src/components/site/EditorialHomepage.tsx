@@ -53,6 +53,15 @@ const stats = [
   { value: "−٩٣٪", label: "وقت أقل بين الطلب والرد", tone: "fusion" },
 ];
 
+const trustPoints = [
+  "العربية ولهجاتها",
+  "ذاكرة تعرف مشروعك",
+  "ستة تخصصات تتعاون",
+  "موافقتك قبل التنفيذ",
+  "أدواتك في مكان واحد",
+  "سجل واضح لكل خطوة",
+] as const;
+
 const statHorizonPaths = Array.from({ length: 36 }, (_, index) => {
   const startY = 382 + index * 0.25;
   const firstY = 320 - index * 3.8;
@@ -112,7 +121,7 @@ export function EditorialHomepage() {
   return <div className="sahl-white-home" dir="rtl">
     <section className="sahl-hero" aria-labelledby="home-title"><div className="sahl-hero-ribbon" aria-hidden="true"><i /><i /><i /></div><div className="sahl-shell sahl-hero-layout"><Reveal className="sahl-hero-copy"><p className="sahl-live-metric">مثال لتدفق عمل كامل: <b>١٨٤ مهمة في أسبوع</b></p><h1 id="home-title">ستة موظفين.<br />مشروع واحد <em>يتحرك.</em></h1><p className="sahl-first-claim">أول منصة ذكاء اصطناعي عربية.</p><p className="sahl-lead">منصة تجمع سِراج وأمَل وسالم ونور ودانة وآدم: فريق يخطط ويكتب ويصمم ويبيع وينظم ويحلل داخل مساحة تعرف مشروعك.</p><div className="sahl-actions"><Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" as const }}>كوّن فريقك مجانًا <ArrowLeft /></Link></Button><Button asChild size="lg" variant="outline"><Link to="/auth" search={{ mode: "signup" as const }}><span className="sahl-google-mark" aria-hidden="true">G</span> ابدأ باستخدام Google</Link></Button></div><small><CheckCircle2 /> تجربة ١٤ يومًا · لا نطلب بطاقة بنكية</small></Reveal></div></section>
 
-    <section className="sahl-trust" aria-label="أمثلة لأنشطة صُمم سهل لخدمتها"><div className="sahl-shell"><p><b>أسماء تجريبية</b> لستة أنشطة يمكن للفريق تشغيلها</p><div className="sahl-trust-row">{["نُقطة قهوة", "دار نَسج", "مدار التقنية", "عيادات وِصال", "مذاق البيت", "أثر العقارية"].map((name) => <span key={name}>{name}</span>)}</div></div></section>
+    <section className="sahl-trust" aria-label="مزايا تشغيل فريق سهل"><div className="sahl-shell"><p><b>مصمم للعمل العربي</b> من أول طلب حتى آخر قرار</p><div className="sahl-trust-row">{trustPoints.map((point, index) => <span key={point}><small>٠{index + 1}</small><b>{point}</b></span>)}</div></div></section>
 
     <section className="sahl-section sahl-capabilities"><div className="sahl-shell"><Reveal><header className="sahl-section-head"><span>ستة تخصصات بسياق واحد</span><h2>كل موظف ينجز دوره.<br /><em>وكل نتيجة تسلّم التالية.</em></h2><p>سِراج يبدأ الحملة، دانة تجهز صورتها، نور توسع قصتها، سالم يحول الاهتمام إلى فرصة، أمَل ترتب الوقت، وآدم يقرأ ما حدث.</p></header></Reveal><div className="sahl-cap-grid">{capabilities.map((item) => <Reveal key={item.kicker} className={`sahl-cap-card is-${item.span} is-${item.tone}`}><div><item.icon /><span>{item.kicker}</span><h3>{item.title}</h3><p>{item.body}</p>{item.kicker.startsWith("سِراج") && <aside className="sahl-coming-ads"><Megaphone aria-hidden="true" /><div><span>قريبًا · قيد التطوير</span><strong>سِراج سيدير الإعلانات الممولة</strong><p>سيبني الحملة عبر تكامل موحّد مع منصات الإعلانات، يراجع الأداء ويحسّن الإعدادات، ولن يطلق حملة أو يعتمد ميزانية قبل موافقتك الصريحة.</p></div></aside>}<Link to="/features">شاهد مهامه <ArrowLeft /></Link></div><ProductFrame src={item.image} mobileSrc={item.mobileImage} alt={`واجهة ${item.kicker} داخل سهل`} /></Reveal>)}</div></div></section>
 

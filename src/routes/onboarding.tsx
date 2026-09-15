@@ -189,7 +189,7 @@ function Onboarding() {
   const next = () => (step === steps.length - 1 ? void finish() : setStep(step + 1));
 
   return (
-    <div className="onboarding-stage min-h-screen">
+    <div className="onboarding-stage sahl-onboarding-theme min-h-screen">
       <header className="mx-auto flex max-w-3xl items-center justify-between px-5 py-6">
         <Link to="/" className="font-display text-2xl font-black">
           سهل<span className="text-primary">.</span>
