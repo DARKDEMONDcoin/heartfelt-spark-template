@@ -77,18 +77,18 @@
 :root {
   --radius: 1.15rem;
 
-  /* هوية سهل — كانفاس أبيض + حبر أسود + ذهب شامبين معدني */
+  /* هوية سهل الموحدة — أبيض دافئ + حبر + قرميدي + ذهبي + تيل */
   --cream: oklch(1 0 0); /* أبيض نقي */
   --ink: oklch(0.16 0.004 60); /* أسود حبري */
   --ink-soft: oklch(0.46 0.006 60);
-  --gold: oklch(0.72 0.125 82);
-  --gold-deep: oklch(0.53 0.105 76);
-  --gold-soft: oklch(0.955 0.035 86);
-  --jade: var(--gold);
-  --jade-deep: var(--gold-deep);
-  --amber: oklch(0.79 0.13 78);
-  --coral: oklch(0.58 0.17 22);
-  --sky: oklch(0.445 0.058 179);
+  --gold: oklch(0.67771 0.12672 73.45);
+  --gold-deep: oklch(0.52418 0.13258 37.48);
+  --gold-soft: oklch(0.965 0.026 73.45);
+  --jade: oklch(0.48558 0.06376 183.77);
+  --jade-deep: oklch(0.42 0.064 183.77);
+  --amber: var(--gold);
+  --coral: var(--gold-deep);
+  --sky: var(--jade);
 
   --background: oklch(1 0 0);
   --foreground: var(--ink);
@@ -96,7 +96,7 @@
   --card-foreground: var(--ink);
   --popover: oklch(1 0 0);
   --popover-foreground: var(--ink);
-  --primary: var(--gold-deep);
+  --primary: var(--coral);
   --primary-foreground: oklch(0.985 0.005 84);
   --secondary: oklch(0.972 0.002 60);
   --secondary-foreground: var(--ink);
@@ -108,7 +108,7 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.16 0.004 60 / 0.12);
   --input: oklch(0.16 0.004 60 / 0.16);
-  --ring: var(--gold-deep);
+  --ring: var(--coral);
   --chart-1: var(--ink);
   --chart-2: var(--jade);
   --chart-3: var(--sky);
@@ -116,24 +116,24 @@
   --chart-5: oklch(0.62 0.006 60);
   --sidebar: oklch(0.99 0.001 60);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--gold-deep);
+  --sidebar-primary: var(--coral);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: var(--gold-soft);
+  --sidebar-accent: oklch(0.965 0.02 183.77);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: oklch(0.16 0.004 60 / 0.1);
-  --sidebar-ring: var(--gold-deep);
+  --sidebar-ring: var(--coral);
 
   --gradient-aurora: linear-gradient(
     115deg,
-    var(--gold-deep) 0%,
+    var(--jade) 0%,
     var(--gold) 48%,
-    oklch(0.82 0.105 93) 100%
+    var(--coral) 100%
   );
   --gradient-ink: linear-gradient(
     150deg,
-    oklch(0.13 0.012 70),
-    oklch(0.22 0.045 70) 62%,
-    oklch(0.34 0.085 76)
+    oklch(0.18 0.009 59),
+    oklch(0.225 0.012 58) 62%,
+    oklch(0.29 0.035 37)
   );
   --shadow-lift: 0 34px 80px -40px oklch(0.53 0.105 76 / 0.3);
   --shadow-card:

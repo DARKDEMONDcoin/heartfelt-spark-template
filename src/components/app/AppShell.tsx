@@ -234,7 +234,7 @@ export function AppShell({
   });
 
   return (
-    <div className={cn("app-shell flex min-h-screen bg-background", embedded && "is-embedded")}>
+    <div className={cn("app-shell sahl-app-theme flex min-h-screen bg-background", embedded && "is-embedded")}>
       <div className="sahl-smoke sahl-smoke-app" aria-hidden="true">
         <i />
         <i />

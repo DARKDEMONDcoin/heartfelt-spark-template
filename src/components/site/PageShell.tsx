@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Reveal } from "@/components/Reveal";
+import { cn } from "@/lib/utils";
 
 export function PageHero({
   eyebrow,
@@ -17,45 +18,24 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-      <div className="sahl-smoke sahl-smoke-page" aria-hidden="true"><i /><i /><i /></div>
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-90"
-        style={{ backgroundImage: "var(--gradient-ink)" }}
-      />
-      <div
-        aria-hidden
-        className="absolute -top-1/2 -left-1/4 h-[140%] w-[80%] opacity-25 blur-3xl"
-        style={{
-          backgroundImage: "var(--gradient-aurora)",
-          backgroundSize: "200% 200%",
-          animation: "aurora-pan 20s ease-in-out infinite",
-          borderRadius: "48% 52% 40% 60%",
-        }}
-      />
-      <div aria-hidden className="grid-lines absolute inset-0 opacity-30" />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-24"
-        style={{ background: "linear-gradient(to bottom, transparent, var(--background))" }}
-      />
-      <div className="relative mx-auto max-w-4xl px-5 text-center">
+    <section className="sahl-page-hero">
+      <div className="sahl-page-ribbon" aria-hidden="true"><i /><i /><i /></div>
+      <div className="sahl-page-hero-inner">
         {eyebrow ? (
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/20 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur">
+            <span className="sahl-page-eyebrow">
               {eyebrow}
             </span>
           </Reveal>
         ) : null}
         <Reveal delay={70}>
-          <h1 className="mt-6 font-display text-[2.2rem] leading-[1.2] font-black text-white md:text-5xl">
+          <h1 className="sahl-page-title">
             {title}
           </h1>
         </Reveal>
         {lead ? (
           <Reveal delay={140}>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/90">{lead}</p>
+            <p className="sahl-page-lead">{lead}</p>
           </Reveal>
         ) : null}
         {children ? <Reveal delay={200}>{children}</Reveal> : null}
@@ -74,7 +54,7 @@ export function PageShell({
   hideFooterOnMobile?: boolean;
 }) {
   return (
-    <div className={className ?? "min-h-screen bg-background"}>
+    <div className={cn("sahl-site-page min-h-screen bg-background", className)}>
       <Nav />
       <main>{children}</main>
       <div className={hideFooterOnMobile ? "hidden md:block" : undefined}>
@@ -92,24 +72,15 @@ export function CtaBand({
   lead?: string;
 }) {
   return (
-    <section className="px-5 py-20">
+    <section className="sahl-page-cta px-5 py-20">
       <Reveal>
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] p-10 text-center md:p-16">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "var(--gradient-aurora)",
-              backgroundSize: "200% 200%",
-              animation: "aurora-pan 14s ease-in-out infinite",
-            }}
-          />
-          <div aria-hidden className="grid-lines absolute inset-0 opacity-40" />
+        <div className="sahl-page-cta-panel relative mx-auto max-w-6xl overflow-hidden p-10 text-center md:p-16">
+          <div className="sahl-page-cta-ribbon" aria-hidden="true" />
           <div className="relative">
-            <h2 className="font-display text-3xl leading-tight font-black text-white md:text-5xl">
+            <h2 className="font-display text-3xl leading-tight font-black md:text-5xl">
               {title}
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-white/90">{lead}</p>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">{lead}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 to="/contact"
@@ -120,7 +91,7 @@ export function CtaBand({
               </Link>
               <Link
                 to="/pricing"
-                className="inline-flex items-center rounded-full border border-white/60 bg-white/15 px-7 py-4 font-semibold text-white backdrop-blur transition-colors hover:bg-white/25"
+                className="inline-flex items-center rounded-md border border-border bg-background px-7 py-4 font-semibold text-foreground transition-colors hover:bg-secondary"
               >
                 شاهد الأسعار
               </Link>

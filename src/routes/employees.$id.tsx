@@ -59,7 +59,7 @@ function MemberPage() {
 
   return (
     <PageShell>
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40">
+      <section className="sahl-member-hero relative overflow-hidden pt-32 pb-16 md:pt-40">
         <div
           aria-hidden
           className="absolute inset-0"
