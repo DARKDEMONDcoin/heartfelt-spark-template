@@ -14899,7 +14899,7 @@ section:has(> .integration-grid-wave) {
     0% { transform: skewX(-18deg) rotate(-10deg) translate3d(-2%, -1%, 0) scale(1.02); }
     100% { transform: skewX(-18deg) rotate(-8.5deg) translate3d(3%, 2%, 0) scale(1.055); }
   }
-  .sahl-hero-layout { min-height: 0; display: block; padding-top: 250px; }
+  .sahl-hero-layout { min-height: 0; display: block; padding-top: 214px; }
   .sahl-hero-copy { width: 100%; }
   .sahl-live-metric { max-width: 100%; font-size: .82rem; line-height: 1.55; }
   .sahl-hero h1 { max-width: 390px; margin-top: 40px; font-size: 3.7rem; line-height: 1.07; }
@@ -15340,5 +15340,7 @@ section:has(> .integration-grid-wave) {
 }
 
 @media (max-width: 720px) {
+  .sahl-hero-product { margin-inline: auto; width: 86%; }
+  .sahl-hero-product .sahl-device-frame.is-hero img { max-height: 430px; object-fit: cover; object-position: center top; }
   .sahl-hero-product .sahl-float-note { position: static; margin-top: 14px; min-width: 0; width: 100%; animation: none; }
 }
