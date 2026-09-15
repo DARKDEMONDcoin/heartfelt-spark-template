@@ -188,6 +188,16 @@ function SirajDemo() {
 export function EditorialHomepage() {
   const [sector, setSector] = useState(0);
   const currentSector = sectors[sector] ?? sectors[0];
+  /** إيقاف حركات المشاهد خارج الشاشة حتى يبقى التمرير سلسًا تمامًا. */
+  useEffect(() => {
+    const scenes = Array.from(document.querySelectorAll<HTMLElement>(".sahl-scene"));
+    if (!scenes.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) entry.target.classList.toggle("is-onscreen", entry.isIntersecting);
+    }, { rootMargin: "20% 0px" });
+    for (const scene of scenes) observer.observe(scene);
+    return () => observer.disconnect();
+  }, []);
   return <div className="sahl-white-home" dir="rtl">
     <section className="sahl-hero" aria-labelledby="home-title"><div className="sahl-hero-ribbon" aria-hidden="true"><i /><i /><i /></div><div className="sahl-shell sahl-hero-layout"><Reveal className="sahl-hero-copy"><p className="sahl-live-metric">١٠٨ قدرة جاهزة · ٤٠ تكاملاً · <b>٦ موظفين بالعربية</b></p><h1 id="home-title">ستة موظفين بالعربية.<br /><em>مشروع يتحرك كل يوم.</em></h1><p className="sahl-first-claim">أول منصة ذكاء اصطناعي عربية.</p><p className="sahl-lead">لأصحاب المتاجر والعيادات والمطاعم والمكاتب: فريق يكتب ويصمم ويبيع وينظم ويحلل بلهجة جمهورك — وأنت تعتمد قبل أي تنفيذ.</p><div className="sahl-actions"><Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" as const }}>كوّن فريقك مجانًا <ArrowLeft /></Link></Button><Button asChild size="lg" variant="outline"><Link to="/auth" search={{ mode: "signup" as const }}><span className="sahl-google-mark" aria-hidden="true">G</span> ابدأ باستخدام Google</Link></Button></div><small><CheckCircle2 /> تجربة ١٤ يومًا · لا نطلب بطاقة بنكية</small></Reveal><div className="sahl-hero-product"><span className="sahl-hero-wash" aria-hidden="true" /><ProductFrame src={sonnyDesktop} mobileSrc={sonnyMobile} alt="مساحة عمل سهل: محادثة سِراج داخل المنصة" hero /><div className="sahl-float-note"><CheckCircle2 aria-hidden="true" /><div><small>صفحة الموافقات</small><b>كل مخرج بانتظار اعتمادك</b></div></div></div></div></section>
 
