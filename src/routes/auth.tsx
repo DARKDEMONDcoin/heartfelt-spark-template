@@ -1,38 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import {
-  ArrowLeft,
-  Building2,
-  Eye,
-  EyeOff,
-  Loader2,
-  Lock,
-  Mail,
-  ShieldCheck,
-  Sparkles,
-  User,
-} from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
-import { Reveal } from "@/components/Reveal";
-import { AmbientBackground } from "@/components/site/AmbientBackground";
-import { AuthCover } from "@/components/site/AuthCover";
 import { LogoMark } from "@/components/site/LogoMark";
 import { supabase } from "@/integrations/supabase/client";
 import { signIn } from "@/lib/auth";
 import { GUEST_EMAIL } from "@/lib/guest.functions";
 import { createAccount } from "@/lib/signup.functions";
-import { plans } from "@/data/pricing";
-
 import { cn } from "@/lib/utils";
 
 const searchSchema = z.object({
   mode: z.enum(["signup", "signin"]).default("signup").optional(),
-  /** الباقة القادمة من صفحة الأسعار — تُعرض للمستخدم ولا تُلزمه بالدفع الآن. */
   plan: z.enum(["start", "growth"]).optional(),
 });
-
 
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
@@ -43,7 +25,7 @@ export const Route = createFileRoute("/auth")({
       {
         name: "description",
         content:
-          "سجّل حساباً مجانياً في سهل خلال دقيقة: اسمك، اسم نشاطك، ولهجتك — ويبدأ فريق الموظفين الرقميين العمل معك فوراً.",
+          "سجّل حساباً مجانياً في سهل خلال دقيقة، أو سجّل الدخول إلى مساحة عملك — فريق موظفين بالذكاء الاصطناعي يعمل بالعربية.",
       },
       { property: "og:title", content: "أنشئ حسابك في سهل" },
       {
@@ -57,21 +39,32 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-const dialects = ["خليجية", "مصرية", "شامية", "مغربية", "فصحى"] as const;
-
-const inputCls = "glass-input px-11";
+const arabCountries = [
+  { code: "SA", flag: "🇸🇦", name: "السعودية" },
+  { code: "AE", flag: "🇦🇪", name: "الإمارات" },
+  { code: "EG", flag: "🇪🇬", name: "مصر" },
+  { code: "KW", flag: "🇰🇼", name: "الكويت" },
+  { code: "QA", flag: "🇶🇦", name: "قطر" },
+  { code: "BH", flag: "🇧🇭", name: "البحرين" },
+  { code: "OM", flag: "🇴🇲", name: "عُمان" },
+  { code: "JO", flag: "🇯🇴", name: "الأردن" },
+  { code: "LB", flag: "🇱🇧", name: "لبنان" },
+  { code: "SY", flag: "🇸🇾", name: "سوريا" },
+  { code: "IQ", flag: "🇮🇶", name: "العراق" },
+  { code: "PS", flag: "🇵🇸", name: "فلسطين" },
+  { code: "YE", flag: "🇾🇪", name: "اليمن" },
+  { code: "SD", flag: "🇸🇩", name: "السودان" },
+  { code: "LY", flag: "🇱🇾", name: "ليبيا" },
+  { code: "TN", flag: "🇹🇳", name: "تونس" },
+  { code: "DZ", flag: "🇩🇿", name: "الجزائر" },
+  { code: "MA", flag: "🇲🇦", name: "المغرب" },
+  { code: "MR", flag: "🇲🇷", name: "موريتانيا" },
+  { code: "SO", flag: "🇸🇴", name: "الصومال" },
+  { code: "DJ", flag: "🇩🇯", name: "جيبوتي" },
+  { code: "KM", flag: "🇰🇲", name: "جزر القمر" },
+] as const;
 
 type Errors = Record<string, string>;
-
-function strengthOf(pw: string) {
-  let score = 0;
-  if (pw.length >= 8) score++;
-  if (pw.length >= 12) score++;
-  if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
-  if (/\d/.test(pw)) score++;
-  if (/[^A-Za-z0-9]/.test(pw)) score++;
-  return Math.min(score, 4);
-}
 
 function arabicError(message: string) {
   const m = message.toLowerCase();
@@ -80,13 +73,45 @@ function arabicError(message: string) {
   if (m.includes("invalid login credentials")) return "البريد أو كلمة المرور غير صحيحة.";
   if (m.includes("email not confirmed")) return "لم يتم تأكيد البريد بعد — افتح رسالة التأكيد في بريدك.";
   if (m.includes("password should be at least")) return "كلمة المرور قصيرة جداً — ٨ أحرف على الأقل.";
+  if (m.includes("provider is not enabled") || m.includes("unsupported provider"))
+    return "الدخول عبر Google غير مفعّل حالياً — استخدم البريد وكلمة المرور.";
   if (m.includes("rate limit") || m.includes("too many"))
     return "محاولات كثيرة في وقت قصير — انتظر دقيقة ثم أعد المحاولة.";
-  if (m.includes("invalid email") || m.includes("email address"))
-    return "صيغة البريد الإلكتروني غير صحيحة.";
+  if (m.includes("invalid email") || m.includes("email address")) return "صيغة البريد الإلكتروني غير صحيحة.";
   if (m.includes("failed to fetch") || m.includes("network"))
     return "تعذّر الاتصال بالخدمة — تحقّق من الإنترنت وأعد المحاولة.";
   return message || "حدث خطأ غير متوقع — أعد المحاولة.";
+}
+
+function GoogleIcon() {
+  return (
+    <svg viewBox="0 0 18 18" className="sauth-google-icon" aria-hidden="true">
+      <path
+        fill="#4285F4"
+        d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.49h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.63Z"
+      />
+      <path
+        fill="#34A853"
+        d="M9 18c2.43 0 4.47-.8 5.96-2.17l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18Z"
+      />
+      <path fill="#FBBC05" d="M3.97 10.73a5.4 5.4 0 0 1 0-3.46V4.94H.96a9 9 0 0 0 0 8.12l3.01-2.33Z" />
+      <path
+        fill="#EA4335"
+        d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.9 11.43 0 9 0A9 9 0 0 0 .96 4.94l3.01 2.33C4.68 5.15 6.66 3.58 9 3.58Z"
+      />
+    </svg>
+  );
+}
+
+function CornerGlow() {
+  return (
+    <div className="sauth-glow" aria-hidden="true">
+      <span className="sauth-glow-blob is-one" />
+      <span className="sauth-glow-blob is-two" />
+      <span className="sauth-glow-blob is-three" />
+      <span className="sauth-glow-blob is-four" />
+    </div>
+  );
 }
 
 function AuthPage() {
@@ -96,20 +121,16 @@ function AuthPage() {
   const [mode, setMode] = useState<"signup" | "signin">(search.mode ?? "signup");
 
   const [fullName, setFullName] = useState("");
-  const [company, setCompany] = useState("");
-  const [dialect, setDialect] = useState<string>("خليجية");
+  const [country, setCountry] = useState<string>("SA");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [accepted, setAccepted] = useState(false);
+  const [updates, setUpdates] = useState(true);
   const [showPw, setShowPw] = useState(false);
 
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState("");
   const [busy, setBusy] = useState(false);
   const [resetSent, setResetSent] = useState(false);
-
-  const strength = useMemo(() => strengthOf(password), [password]);
 
   useEffect(() => {
     setMode(search.mode ?? "signup");
@@ -122,7 +143,6 @@ function AuthPage() {
       const user = data.user;
       if (!user || user.is_anonymous || !user.email) return;
       if (user.email === GUEST_EMAIL) {
-        // جلسة التجربة: ننهيها هنا حتى يستطيع الزائر التسجيل بحسابه
         void supabase.auth.signOut();
         return;
       }
@@ -132,6 +152,8 @@ function AuthPage() {
       active = false;
     };
   }, [navigate]);
+
+  const isSignup = mode === "signup";
 
   function switchMode(next: "signup" | "signin") {
     setMode(next);
@@ -147,14 +169,8 @@ function AuthPage() {
     if (!mail) e['email'] = "أدخل بريدك الإلكتروني.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) e['email'] = "صيغة البريد غير صحيحة.";
     if (!password) e['password'] = "أدخل كلمة المرور.";
-    else if (mode === "signup" && password.length < 8) e['password'] = "٨ أحرف على الأقل.";
-
-    if (mode === "signup") {
-      if (fullName.trim().length < 3) e['fullName'] = "اكتب اسمك الكامل (٣ أحرف على الأقل).";
-      if (company.trim().length < 2) e['company'] = "اكتب اسم نشاطك أو شركتك.";
-      if (confirm !== password) e['confirm'] = "كلمتا المرور غير متطابقتين.";
-      if (!accepted) e['accepted'] = "لا بد من الموافقة على الشروط وسياسة الخصوصية.";
-    }
+    else if (isSignup && password.length < 8) e['password'] = "٨ أحرف على الأقل.";
+    if (isSignup && fullName.trim().length < 3) e['fullName'] = "اكتب اسمك الكامل (٣ أحرف على الأقل).";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -166,14 +182,14 @@ function AuthPage() {
     if (!validate()) return;
     setBusy(true);
     try {
-      if (mode === "signup") {
+      if (isSignup) {
         const res = await createAccountFn({
           data: {
             email: email.trim(),
             password,
             fullName: fullName.trim(),
-            company: company.trim(),
-            dialect,
+            company: fullName.trim(),
+            dialect: "فصحى",
           },
         });
         if (!res.ok) {
@@ -189,14 +205,26 @@ function AuthPage() {
         await signIn(email.trim(), password);
         await navigate({ to: "/onboarding", replace: true });
         return;
-      } else {
-        await signIn(email.trim(), password);
-        await navigate({ to: "/app", replace: true });
       }
+      await signIn(email.trim(), password);
+      await navigate({ to: "/app", replace: true });
     } catch (error) {
       setFormError(arabicError(error instanceof Error ? error.message : String(error)));
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function onGoogle() {
+    setFormError("");
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/app` },
+      });
+      if (error) throw error;
+    } catch (error) {
+      setFormError(arabicError(error instanceof Error ? error.message : String(error)));
     }
   }
 
@@ -221,330 +249,156 @@ function AuthPage() {
     }
   }
 
-  const isSignup = mode === "signup";
-  const chosenPlan = plans.find((p) => p.id === search.plan);
-
-
   return (
-    <main className="auth-experience">
-      <AmbientBackground quiet />
-      <header className="auth-topbar">
-        <Link to="/" className="auth-logo"><LogoMark className="size-8" size={32} /> <span>سهل</span></Link>
+    <main className="sauth-page" dir="rtl">
+      <CornerGlow />
+
+      <header className="sauth-topbar">
+        <Link to="/" className="sauth-logo" aria-label="سهل — الصفحة الرئيسية">
+          <LogoMark className="size-7" size={28} />
+        </Link>
       </header>
 
-      <div className="auth-layout">
-        <aside className="auth-story" aria-label="عملاء سهل">
-          <AuthCover />
-        </aside>
+      <div className="sauth-center">
+        <div className="sauth-card">
+          <div className="sauth-card-body">
+            <h1 className="sauth-title">{isSignup ? "أنشئ حساب سهل" : "سجّل الدخول إلى سهل"}</h1>
 
-        <section className="auth-form-column">
-          <div className="auth-mobile-intro">
-            <span className="auth-eyebrow">سهل يبدأ من هنا</span>
-            <h1>{isSignup ? "ابنِ فريقك في دقيقة" : "أهلًا بعودتك"}</h1>
-            <p>{isSignup ? "أخبرنا عنك، وسنجهز أول مساحة عمل لك." : "فريقك ومهامك ينتظرونك."}</p>
-          </div>
-        {isSignup && chosenPlan ? (
-          <Reveal>
-            <div className="auth-plan-note">
-              <p className="text-sm font-bold">
-                اخترت باقة «{chosenPlan.name}» — تبدأ بـ ١٤ يوماً مجاناً بدون بطاقة.
-              </p>
-              <Link to="/pricing" className="text-sm font-bold text-primary">
-                غيّر الباقة
-              </Link>
-            </div>
-          </Reveal>
-        ) : null}
-        <Reveal>
-          <div className="auth-form-card">
-            <div className="mb-6 hidden lg:block">
-              <span className="auth-eyebrow">{isSignup ? "حساب مجاني بدون بطاقة" : "دخول آمن"}</span>
-              <div className="mt-3 font-display text-3xl font-black">{isSignup ? "كوّن فريقك الآن" : "سجّل الدخول إلى فريقك"}</div>
-              <p className="mt-2 text-sm text-muted-foreground">{isSignup ? "ثلاث خطوات قصيرة، ثم تبدأ مساحة العمل." : "أدخل بياناتك للعودة إلى كل ما أنجزه فريقك."}</p>
+            <button type="button" className="sauth-google" onClick={onGoogle}>
+              <span>{isSignup ? "التسجيل عبر Google" : "المتابعة عبر Google"}</span>
+              <GoogleIcon />
+            </button>
+
+            <div className="sauth-divider">
+              <span>{isSignup ? "أو سجّل عبر" : "أو ادخل عبر"}</span>
             </div>
 
-            <div className="auth-mode-switch">
-              {(
-                [
-                  { k: "signup", l: "إنشاء حساب" },
-                  { k: "signin", l: "تسجيل الدخول" },
-                ] as const
-              ).map((t) => (
-                <button
-                  key={t.k}
-                  type="button"
-                  onClick={() => switchMode(t.k)}
-                  aria-pressed={mode === t.k}
-                  className={cn(
-                    "auth-mode-option",
-                    mode === t.k && "is-active",
-                  )}
-                >
-                  {t.l}
-                </button>
-              ))}
-            </div>
+            <form onSubmit={onSubmit} noValidate className="sauth-form">
+              <div className="sauth-field">
+                <label htmlFor="email">البريد الإلكتروني</label>
+                <input
+                  id="email"
+                  type="email"
+                  dir="ltr"
+                  value={email}
+                  autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  aria-invalid={Boolean(errors['email'])}
+                  className={cn("sauth-input", errors['email'] && "is-invalid")}
+                />
+                {errors['email'] ? <p className="sauth-error">{errors['email']}</p> : null}
+              </div>
 
-            <form onSubmit={onSubmit} noValidate className="auth-form space-y-4">
               {isSignup ? (
-                <>
-                  <Field
+                <div className="sauth-field">
+                  <label htmlFor="fullName">الاسم الكامل</label>
+                  <input
                     id="fullName"
-                    label="الاسم الكامل"
-                    icon={User}
+                    type="text"
                     value={fullName}
-                    onChange={setFullName}
-                    placeholder="مثال: سارة العتيبي"
                     autoComplete="name"
-                    error={errors['fullName']}
+                    onChange={(e) => setFullName(e.target.value)}
+                    aria-invalid={Boolean(errors['fullName'])}
+                    className={cn("sauth-input", errors['fullName'] && "is-invalid")}
                   />
-                  <Field
-                    id="company"
-                    label="اسم النشاط أو الشركة"
-                    icon={Building2}
-                    value={company}
-                    onChange={setCompany}
-                    placeholder="مثال: متجر لمسة"
-                    autoComplete="organization"
-                    error={errors['company']}
-                  />
-                  <div>
-                    <label htmlFor="dialect" className="mb-1.5 block text-sm font-bold">
-                      اللهجة المفضلة
-                    </label>
-                    <select
-                      id="dialect"
-                      value={dialect}
-                      onChange={(e) => setDialect(e.target.value)}
-                      className="glass-input px-4"
-                    >
-                      {dialects.map((d) => (
-                        <option key={d} value={d}>
-                          {d}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </>
+                  {errors['fullName'] ? <p className="sauth-error">{errors['fullName']}</p> : null}
+                </div>
               ) : null}
 
-              <Field
-                id="email"
-                label="البريد الإلكتروني"
-                icon={Mail}
-                type="email"
-                value={email}
-                onChange={setEmail}
-                placeholder="you@example.com"
-                autoComplete="email"
-                dir="ltr"
-                error={errors['email']}
-              />
-
-              <div>
-                <label htmlFor="password" className="mb-1.5 block text-sm font-bold">
-                  كلمة المرور
-                </label>
-                <div className="relative">
-                  <Lock className="pointer-events-none absolute top-1/2 start-4 size-4.5 -translate-y-1/2 text-ink-soft" />
+              <div className="sauth-field">
+                <label htmlFor="password">كلمة المرور</label>
+                <div className="sauth-pw">
                   <input
                     id="password"
                     type={showPw ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete={isSignup ? "new-password" : "current-password"}
                     dir="ltr"
+                    value={password}
+                    autoComplete={isSignup ? "new-password" : "current-password"}
+                    onChange={(e) => setPassword(e.target.value)}
                     aria-invalid={Boolean(errors['password'])}
-                    className={cn(inputCls, "pe-12", errors['password'] && "border-destructive")}
-                    placeholder="••••••••"
+                    className={cn("sauth-input", errors['password'] && "is-invalid")}
                   />
                   <button
                     type="button"
+                    className="sauth-pw-toggle"
                     onClick={() => setShowPw((v) => !v)}
                     aria-label={showPw ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
-                    className="absolute top-1/2 end-3 -translate-y-1/2 rounded-lg p-1.5 text-ink-soft hover:text-primary"
                   >
-                    {showPw ? <EyeOff className="size-4.5" /> : <Eye className="size-4.5" />}
+                    {showPw ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
                 </div>
-                {errors['password'] ? (
-                  <p className="mt-1.5 text-sm font-semibold text-destructive">{errors['password']}</p>
-                ) : null}
-                {isSignup && password ? (
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex h-1.5 flex-1 gap-1">
-                      {[0, 1, 2, 3].map((i) => (
-                        <span
-                          key={i}
-                          className={cn(
-                            "h-full flex-1 rounded-full transition-colors",
-                            i < strength ? "bg-primary" : "bg-border",
-                          )}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-xs font-bold text-ink-soft">
-                      {["ضعيفة", "مقبولة", "جيدة", "قوية", "ممتازة"][strength]}
-                    </span>
-                  </div>
+                {errors['password'] ? <p className="sauth-error">{errors['password']}</p> : null}
+                {!isSignup ? (
+                  <button type="button" className="sauth-forgot" onClick={onForgot}>
+                    نسيت كلمة المرور؟
+                  </button>
                 ) : null}
               </div>
 
               {isSignup ? (
-                <div>
-                  <label htmlFor="confirm" className="mb-1.5 block text-sm font-bold">
-                    تأكيد كلمة المرور
-                  </label>
-                  <div className="relative">
-                    <ShieldCheck className="pointer-events-none absolute top-1/2 start-4 size-4.5 -translate-y-1/2 text-ink-soft" />
-                    <input
-                      id="confirm"
-                      type={showPw ? "text" : "password"}
-                      value={confirm}
-                      onChange={(e) => setConfirm(e.target.value)}
-                      autoComplete="new-password"
-                      dir="ltr"
-                      aria-invalid={Boolean(errors['confirm'])}
-                      className={cn(inputCls, errors['confirm'] && "border-destructive")}
-                      placeholder="••••••••"
-                    />
-                  </div>
-                  {errors['confirm'] ? (
-                    <p className="mt-1.5 text-sm font-semibold text-destructive">{errors['confirm']}</p>
-                  ) : null}
+                <div className="sauth-field">
+                  <label htmlFor="country">الدولة</label>
+                  <select
+                    id="country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="sauth-input sauth-select"
+                  >
+                    {arabCountries.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.flag} {c.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               ) : null}
 
               {isSignup ? (
-                <div>
-                  <label className="flex items-start gap-3 text-sm leading-relaxed">
-                    <input
-                      type="checkbox"
-                      checked={accepted}
-                      onChange={(e) => setAccepted(e.target.checked)}
-                      className="mt-1 size-4 rounded border-border accent-primary"
-                    />
-                    <span className="text-ink-soft">
-                      أوافق على{" "}
-                      <Link to="/terms" className="font-bold text-primary underline">
-                        الشروط
-                      </Link>{" "}
-                      و
-                      <Link to="/privacy" className="font-bold text-primary underline">
-                        سياسة الخصوصية
-                      </Link>
-                      .
-                    </span>
-                  </label>
-                  {errors['accepted'] ? (
-                    <p className="mt-1.5 text-sm font-semibold text-destructive">{errors['accepted']}</p>
-                  ) : null}
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={onForgot}
-                  className="text-sm font-bold text-primary hover:underline"
-                >
-                  نسيت كلمة المرور؟
-                </button>
-              )}
+                <label className="sauth-check">
+                  <input type="checkbox" checked={updates} onChange={(e) => setUpdates(e.target.checked)} />
+                  <span>
+                    أوافق على تلقي تحديثات وعروض من سهل. يمكنك إلغاء الاشتراك في أي وقت.{" "}
+                    <Link to="/privacy" className="sauth-link">
+                      سياسة الخصوصية
+                    </Link>
+                  </span>
+                </label>
+              ) : null}
 
               {formError ? (
-                <p
-                  role="alert"
-                  className="rounded-2xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive"
-                >
+                <p role="alert" className="sauth-form-error">
                   {formError}
                 </p>
               ) : null}
               {resetSent ? (
-                <p
-                  role="status"
-                  className="rounded-2xl border border-primary/40 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary"
-                >
+                <p role="status" className="sauth-note">
                   أرسلنا رابط استعادة كلمة المرور إلى بريدك.
                 </p>
               ) : null}
 
-              <button
-                type="submit"
-                disabled={busy}
-                className="auth-submit"
-              >
-                {busy ? <Loader2 className="size-4.5 animate-spin" /> : <Sparkles className="size-4.5" />}
-                {busy ? "لحظة..." : isSignup ? "أنشئ حسابي" : "دخول"}
+              <button type="submit" className="sauth-submit" disabled={busy}>
+                {busy ? <Loader2 className="size-4 animate-spin" /> : null}
+                {busy ? "لحظة..." : isSignup ? "إنشاء الحساب" : "تسجيل الدخول"}
               </button>
             </form>
-
-            <p className="mt-5 text-center text-sm text-ink-soft">
-              {isSignup ? "لديك حساب بالفعل؟" : "ليس لديك حساب؟"}{" "}
-              <button
-                type="button"
-                onClick={() => switchMode(isSignup ? "signin" : "signup")}
-                className="font-bold text-primary hover:underline"
-              >
-                {isSignup ? "تسجيل الدخول" : "إنشاء حساب"}
-              </button>
-            </p>
-
-            <Link
-              to="/app"
-              className="mt-4 flex items-center justify-center gap-2 text-sm font-bold text-ink-soft hover:text-primary"
-            >
-              تجربة الموظفين بدون تسجيل <ArrowLeft className="size-4" />
-            </Link>
           </div>
-        </Reveal>
-      </section>
+
+          <div className="sauth-card-foot">
+            {isSignup ? "لديك حساب بالفعل؟" : "ليس لديك حساب؟"}{" "}
+            <button type="button" className="sauth-link" onClick={() => switchMode(isSignup ? "signin" : "signup")}>
+              {isSignup ? "سجّل الدخول" : "أنشئ حسابًا"}
+            </button>
+          </div>
+        </div>
+
+        <footer className="sauth-footer">
+          <span>© سهل</span>
+          <span className="sauth-footer-links">
+            <Link to="/privacy">الخصوصية</Link>
+            <Link to="/terms">الشروط</Link>
+          </span>
+        </footer>
       </div>
     </main>
-  );
-}
-
-function Field({
-  id,
-  label,
-  icon: Icon,
-  value,
-  onChange,
-  placeholder,
-  autoComplete,
-  type = "text",
-  dir,
-  error,
-}: {
-  id: string;
-  label: string;
-  icon: typeof Mail;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string | undefined;
-  autoComplete?: string | undefined;
-  type?: string;
-  dir?: "ltr" | "rtl";
-  error?: string | undefined;
-}) {
-  return (
-    <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-bold">
-        {label}
-      </label>
-      <div className="relative">
-        <Icon className="pointer-events-none absolute top-1/2 start-4 size-4.5 -translate-y-1/2 text-ink-soft" />
-        <input
-          id={id}
-          type={type}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          autoComplete={autoComplete}
-          {...(dir ? { dir } : {})}
-          aria-invalid={Boolean(error)}
-          className={cn(inputCls, error && "border-destructive")}
-        />
-      </div>
-      {error ? <p className="mt-1.5 text-sm font-semibold text-destructive">{error}</p> : null}
-    </div>
   );
 }
