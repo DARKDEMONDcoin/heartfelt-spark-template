@@ -14574,6 +14574,11 @@ section:has(> .integration-grid-wave) {
 @keyframes sahl-horizon-node { 50% { opacity: .88; transform: scale(1.75); } }
 
 .sahl-demo-section { background: var(--home-soft); }
+.sahl-plan-flow { margin: 0; text-align: center; }
+.sahl-plan-flow picture { display: block; }
+.sahl-plan-flow img { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 26px 48px oklch(.2 .01 59 / .12); }
+.sahl-plan-flow figcaption { margin-top: 18px; font-size: .92rem; color: oklch(.48 .02 59); }
+@media (max-width: 720px) { .sahl-plan-flow img { border-radius: 16px; } }
 .sahl-demo-laptop { position: relative; padding: 0 3% 30px; filter: drop-shadow(0 38px 42px oklch(.2 .01 59 / .18)); }
 .sahl-demo-lid { border-width: 9px; border-radius: 15px 15px 8px 8px; }
 .sahl-demo-laptop .sahl-laptop-base { right: -1%; width: 102%; bottom: 8px; height: 22px; }
