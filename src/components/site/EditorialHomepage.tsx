@@ -30,7 +30,7 @@ import planFlowTall from "@/assets/product/plan-flow-tall.png";
 type DemoPhase = "idle" | "thinking" | "draft" | "approved";
 
 const capabilities = [
-  { icon: MessageSquareText, kicker: "سِراج · السوشيال ميديا", title: "من طلب واحد إلى حملة جاهزة للاعتماد.", body: "يبني خطة ٣٠ يومًا، يكتب كل نسخة، ينسّق التصميم والنشر، ثم يعيد أفضل الأفكار إلى التقويم.", image: sonnyDesktop, mobileImage: sonnyMobile, tone: "terracotta", span: "wide" },
+  { icon: MessageSquareText, kicker: "سِراج · السوشيال والإعلانات المموّلة", title: "من طلب واحد إلى حملة جاهزة للاعتماد.", body: "يبني خطة ٣٠ يومًا، يكتب كل نسخة، ينسّق التصميم والنشر، ثم يعيد أفضل الأفكار إلى التقويم.", image: sonnyDesktop, mobileImage: sonnyMobile, tone: "terracotta", span: "wide" },
   { icon: CalendarCheck2, kicker: "أمَل · المساعدة التنفيذية", title: "ساعتك القادمة واضحة قبل أن تبدأ.", body: "تفرز البريد، ترتب الاجتماعات، وتضع القرارات المعلّقة في ملخص صباحي واحد.", image: evaDesktop, mobileImage: evaMobile, tone: "gold", span: "standard" },
   { icon: BarChart3, kicker: "سالم · المبيعات", title: "كل فرصة لها رسالة وخطوة تالية.", body: "يبحث عن العميل المناسب، يخصص التواصل، ويسلمك الفرص الجاهزة للمكالمة.", image: samDesktop, mobileImage: samMobile, tone: "teal", span: "standard" },
   { icon: SearchCheck, kicker: "نور · المحتوى والسيو", title: "إجابة عربية يجدها عميلك وقت البحث.", body: "ترصد السؤال، تبني خطة موضوعات، وتكتب صفحات أصلية مرتبطة بما يطلبه السوق.", image: nourDesktop, mobileImage: nourMobile, tone: "terracotta", span: "wide" },
