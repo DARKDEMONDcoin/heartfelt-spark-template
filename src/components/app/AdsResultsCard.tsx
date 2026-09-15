@@ -1,5 +1,5 @@
 import { AppIcon } from "@/components/site/AppIcon";
-import { BarChart3 } from "lucide-react";
+import { Activity, BarChart3, MousePointerClick, ReceiptText, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -40,10 +40,10 @@ export function AdsResultsCard({
 
   const cost = data?.conversions ? data.spend / data.conversions : 0;
   const metrics = data ? [
-    { k: "الإنفاق", v: `${fmt(data.spend)} ${data.currency}` },
-    { k: "النقرات", v: fmt(data.clicks) },
-    { k: "نسبة النقر", v: `${fmt(data.ctr, 2)}%` },
-    { k: "التحويلات", v: fmt(data.conversions) },
+    { k: "الإنفاق", v: `${fmt(data.spend)} ${data.currency}`, icon: ReceiptText },
+    { k: "النقرات", v: fmt(data.clicks), icon: MousePointerClick },
+    { k: "نسبة النقر", v: `${fmt(data.ctr, 2)}%`, icon: Activity },
+    { k: "التحويلات", v: fmt(data.conversions), icon: Target },
   ] : [];
   const maxSpend = Math.max(...(data?.campaigns ?? []).map((campaign) => campaign.spend), 1);
   const isConnected = (providers: readonly string[]) =>
@@ -89,7 +89,7 @@ export function AdsResultsCard({
           <div className="ads-report-metrics">
             {metrics.map((m) => (
               <div key={m.k}>
-                <p>{m.k}</p>
+                <p className="flex items-center gap-1.5"><m.icon className="size-4" /> {m.k}</p>
                 <strong>{m.v}</strong>
               </div>
             ))}

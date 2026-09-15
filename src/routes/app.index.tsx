@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Clock3, Link2, ListChecks } from "lucide-react";
 
 import { ActivationMap } from "@/components/app/ActivationMap";
 import { AdsResultsCard } from "@/components/app/AdsResultsCard";
@@ -99,10 +99,10 @@ function AppHome() {
 
   // أرقام صفرية لا تُعرض: لوحة نظيفة تعرض ما حدث فعلاً فقط.
   const kpis = [
-    { k: "مهام منجزة", n: done.length, d: "منذ انطلاق مساحتك" },
-    { k: "قيد التنفيذ", n: running.length, d: "فريقك يعمل الآن" },
-    { k: "بانتظار موافقتك", n: review.length, d: "تحتاج قرارك", urgent: true },
-    { k: "حسابات مرتبطة", n: connected, d: `من أصل ${integrations?.length ?? 0}` },
+    { k: "مهام منجزة", n: done.length, d: "منذ انطلاق مساحتك", icon: CheckCircle2 },
+    { k: "قيد التنفيذ", n: running.length, d: "فريقك يعمل الآن", icon: Clock3 },
+    { k: "بانتظار موافقتك", n: review.length, d: "تحتاج قرارك", urgent: true, icon: ListChecks },
+    { k: "حسابات مرتبطة", n: connected, d: `من أصل ${integrations?.length ?? 0}`, icon: Link2 },
   ].filter((k) => k.n > 0);
 
   const lead = started
@@ -148,6 +148,7 @@ function AppHome() {
                   key={k.k}
                   className={k.urgent ? "app-metric is-urgent" : "app-metric"}
                 >
+                  <span className="app-metric-icon" aria-hidden="true"><k.icon /></span>
                   <p className="app-metric-label">{k.k}</p>
                   <p className="app-metric-number">{k.n}</p>
                   <p className="app-metric-note">{k.d}</p>
