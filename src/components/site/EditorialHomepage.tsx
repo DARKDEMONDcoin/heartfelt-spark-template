@@ -26,6 +26,8 @@ import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png";
 import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png";
 import planFlowWide from "@/assets/product/plan-flow-wide.png";
 import planFlowTall from "@/assets/product/plan-flow-tall.png";
+import adsVisual from "@/assets/product/ads-visual.png";
+import proofVisual from "@/assets/product/proof-visual.png";
 
 type DemoPhase = "idle" | "thinking" | "draft" | "approved";
 
