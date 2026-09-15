@@ -226,6 +226,13 @@ export const Route = createFileRoute("/app/chat/$id")({
         name: "description",
         content: loaderData ? `تحدث مع ${loaderData.name} — ${loaderData.role}.` : "محادثة الموظف.",
       },
+      { property: "og:title", content: loaderData ? `محادثة ${loaderData.name} | سهل` : "محادثة | سهل" },
+      {
+        property: "og:description",
+        content: loaderData ? `تحدث مع ${loaderData.name} — ${loaderData.role}.` : "محادثة الموظف.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),

@@ -17,6 +17,10 @@ export const Route = createFileRoute("/app/")({
     meta: [
       { title: "مساحة عملك | سهل" },
       { name: "description", content: "نظرة عامة على عمل فريقك الرقمي اليوم." },
+      { property: "og:title", content: "مساحة عملك | سهل" },
+      { property: "og:description", content: "نظرة عامة على عمل فريقك الرقمي اليوم." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),
