@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Check, ArrowLeft } from "lucide-react";
+import { Check, ArrowLeft, Settings, Link2, MessageSquare, CheckSquare, Zap, BarChart } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import {
   useBrainItems,
@@ -19,6 +20,7 @@ type StepTo =
   | "/app/rankings";
 
 type Step = {
+  icon: LucideIcon;
   id: string;
   title: string;
   lead: string;
@@ -55,6 +57,7 @@ export function ActivationMap({
   const steps: Step[] = [
     {
       id: "profile",
+      icon: Settings,
       title: "عرّفنا على نشاطك",
       lead: "رابط موقعك ونبذة عن جمهورك — منها يبني فريقك كل شيء.",
       to: "/app/settings",
@@ -63,6 +66,7 @@ export function ActivationMap({
     },
     {
       id: "connect",
+      icon: Link2,
       title: "اربط حساباتك",
       lead: "حساب واحد يكفي للبدء، وكل حساب إضافي يوسّع وصولك.",
       to: "/app/integrations",
@@ -71,6 +75,7 @@ export function ActivationMap({
     },
     {
       id: "brief",
+      icon: MessageSquare,
       title: "اطلب أول عمل من فريقك",
       lead: "اكتب طلبك بالعربي كما تكلّم موظفاً — ويأتيك جاهزاً.",
       to: "/app/chat",
@@ -79,6 +84,7 @@ export function ActivationMap({
     },
     {
       id: "approve",
+      icon: CheckSquare,
       title: "راجع واعتمد",
       lead: "لا يُنشر شيء قبل موافقتك، والاعتماد بنقرة واحدة.",
       to: "/app/approvals",
@@ -87,6 +93,7 @@ export function ActivationMap({
     },
     {
       id: "autopilot",
+      icon: Zap,
       title: "شغّل النشر التلقائي",
       lead: "حدد الأيام والأوقات، ويكمل فريقك بدون تدخّل يومي.",
       to: "/app/autopilot",
@@ -95,6 +102,7 @@ export function ActivationMap({
     },
     {
       id: "measure",
+      icon: BarChart,
       title: "تابع نتائجك",
       lead: "ترتيبك في البحث وأداء منشوراتك في مكان واحد.",
       to: "/app/rankings",
@@ -178,7 +186,7 @@ export function ActivationMap({
                 s.done ? "bg-foreground text-background" : "bg-secondary text-ink-soft",
               )}
             >
-              {s.done ? <Check className="size-3.5" strokeWidth={3} /> : i + 1}
+              {s.done ? <Check className="size-3.5" strokeWidth={3} /> : <s.icon className="size-3.5" /> }
             </span>
             <span className="min-w-0 flex-1">
               <span className="flex items-center gap-2 text-sm font-bold sm:text-base">

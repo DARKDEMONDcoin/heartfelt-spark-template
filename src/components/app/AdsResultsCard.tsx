@@ -1,3 +1,6 @@
+import { AppIcon } from "@/components/site/AppIcon";
+import { Activity, BarChart3, MousePointerClick, ReceiptText, Target } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Link } from "@tanstack/react-router";
@@ -37,10 +40,10 @@ export function AdsResultsCard({
 
   const cost = data?.conversions ? data.spend / data.conversions : 0;
   const metrics = data ? [
-    { k: "الإنفاق", v: `${fmt(data.spend)} ${data.currency}` },
-    { k: "النقرات", v: fmt(data.clicks) },
-    { k: "نسبة النقر", v: `${fmt(data.ctr, 2)}%` },
-    { k: "التحويلات", v: fmt(data.conversions) },
+    { k: "الإنفاق", v: `${fmt(data.spend)} ${data.currency}`, icon: ReceiptText },
+    { k: "النقرات", v: fmt(data.clicks), icon: MousePointerClick },
+    { k: "نسبة النقر", v: `${fmt(data.ctr, 2)}%`, icon: Activity },
+    { k: "التحويلات", v: fmt(data.conversions), icon: Target },
   ] : [];
   const maxSpend = Math.max(...(data?.campaigns ?? []).map((campaign) => campaign.spend), 1);
   const isConnected = (providers: readonly string[]) =>
@@ -51,7 +54,7 @@ export function AdsResultsCard({
       <div className="ads-report-head">
         <div>
           <p>مركز قيادة موحّد · بيانات فعلية فقط</p>
-          <h2 id="ads-command-title">أداء الإعلانات عبر المنصات</h2>
+          <h2 id="ads-command-title" className="flex items-center gap-2.5"><BarChart3 className="size-6 text-primary" /> أداء الإعلانات عبر المنصات</h2>
         </div>
         <span>{data ? `${data.account} · آخر ٣٠ يوماً` : "في انتظار أول مصدر بيانات"}</span>
       </div>
@@ -63,10 +66,19 @@ export function AdsResultsCard({
             provider === "facebook" || provider === "meta-ads" || provider === "instagram",
           );
           return (
-            <div key={channel.code} className={reporting ? "is-reporting" : connected ? "is-connected" : undefined}>
-              <small>{channel.code}</small>
-              <b>{channel.label}</b>
-              <span>{reporting ? "يعرض الآن" : connected ? "متصل" : "غير متصل"}</span>
+            <div key={channel.code} className={cn(
+              "flex items-center gap-3",
+              reporting ? "is-reporting" : connected ? "is-connected" : undefined
+            )}>
+              <div className="grid size-10 shrink-0 place-items-center rounded-xl border border-command-line bg-background shadow-sm">
+                <AppIcon name={channel.providers[0]} className="size-5" colored={connected || reporting} />
+              </div>
+              <div className="min-w-0">
+                <b className="block truncate text-sm">{channel.label}</b>
+                <span className="block truncate text-[0.65rem] text-command-dim">
+                  {reporting ? "يعرض الآن" : connected ? "متصل" : "غير متصل"}
+                </span>
+              </div>
             </div>
           );
         })}
@@ -77,7 +89,7 @@ export function AdsResultsCard({
           <div className="ads-report-metrics">
             {metrics.map((m) => (
               <div key={m.k}>
-                <p>{m.k}</p>
+                <p className="flex items-center gap-1.5"><m.icon className="size-4" /> {m.k}</p>
                 <strong>{m.v}</strong>
               </div>
             ))}

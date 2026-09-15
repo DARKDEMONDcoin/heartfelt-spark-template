@@ -32,6 +32,7 @@ import {
   CheckCircle2,
   Sparkles,
   ScrollText,
+  LayoutDashboard,
 } from "lucide-react";
 
 import { AppShell } from "@/components/app/AppShell";
@@ -389,6 +390,7 @@ type WorkTool = {
   title: string;
   description: string;
   to:
+    | "/app/"
     | "/app/tasks"
     | "/app/autopilot"
     | "/app/calendar"
@@ -402,6 +404,13 @@ type WorkTool = {
 };
 
 const WORK_TOOLS: WorkTool[] = [
+  {
+    id: "command-center",
+    title: "مركز القيادة",
+    description: "تابع العمل والنتائج والمنصات من مكان واحد",
+    to: "/app/",
+    icon: LayoutDashboard,
+  },
   {
     id: "tasks",
     title: "المهام",
@@ -552,7 +561,7 @@ const EMPLOYEE_COPY: Record<string, { prompts: string[]; greetings: string[] }> 
 
 /** أزرار الشريط العلوي المناسبة لكل موظف. */
 const BAR_BRAND = new Set(["sonny", "nour", "dana"]);
-const BAR_WORK = new Set(["sonny", "eva", "sam", "nour", "adam"]);
+const BAR_WORK = new Set(["sonny", "eva", "sam", "nour", "adam", "dana"]);
 
 function useTypewriter(lines: string[], pause = 1700) {
   const [line, setLine] = useState(0);
@@ -895,7 +904,7 @@ function ChatView({
               className={cn("topbar-pill", barPanel === "work" && "is-active")}
             >
               <Bot className="size-4 shrink-0" />
-              <span>التشغيل</span>
+              <span>تشغيل ومتابعة</span>
             </button>
           ) : null}
           <button

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Clock3, Link2, ListChecks, Sparkles } from "lucide-react";
 
 import { ActivationMap } from "@/components/app/ActivationMap";
 import { AdsResultsCard } from "@/components/app/AdsResultsCard";
@@ -41,7 +41,7 @@ function FirstRun({ workspace }: { workspace: { id: string } | null }) {
   return (
     <>
       <section className="app-editorial-panel app-first-run">
-        <p className="app-editorial-kicker">ابدأ من هنا</p>
+        <p className="app-editorial-kicker flex items-center gap-1.5"><Sparkles className="size-3 text-primary" /> ابدأ من هنا</p>
         <h2 className="mt-1.5 font-display text-xl font-black sm:text-2xl">
           اطلب أول عمل من فريقك
         </h2>
@@ -99,10 +99,10 @@ function AppHome() {
 
   // أرقام صفرية لا تُعرض: لوحة نظيفة تعرض ما حدث فعلاً فقط.
   const kpis = [
-    { k: "مهام منجزة", n: done.length, d: "منذ انطلاق مساحتك" },
-    { k: "قيد التنفيذ", n: running.length, d: "فريقك يعمل الآن" },
-    { k: "بانتظار موافقتك", n: review.length, d: "تحتاج قرارك", urgent: true },
-    { k: "حسابات مرتبطة", n: connected, d: `من أصل ${integrations?.length ?? 0}` },
+    { k: "مهام منجزة", n: done.length, d: "منذ انطلاق مساحتك", icon: CheckCircle2 },
+    { k: "قيد التنفيذ", n: running.length, d: "فريقك يعمل الآن", icon: Clock3 },
+    { k: "بانتظار موافقتك", n: review.length, d: "تحتاج قرارك", urgent: true, icon: ListChecks },
+    { k: "حسابات مرتبطة", n: connected, d: `من أصل ${integrations?.length ?? 0}`, icon: Link2 },
   ].filter((k) => k.n > 0);
 
   const lead = started
@@ -137,7 +137,7 @@ function AppHome() {
           <section className="app-command-head">
             <div>
               <p>SAHL / EXECUTIVE CONTROL</p>
-              <h2>مركز قيادة العمل والنتائج</h2>
+              <h2 className="flex items-center gap-2.5"> <LayoutDashboard className="size-6 text-primary" /> مركز قيادة العمل والنتائج </h2>
             </div>
             <span><i /> تحديث مباشر من حساباتك</span>
           </section>
@@ -148,6 +148,7 @@ function AppHome() {
                   key={k.k}
                   className={k.urgent ? "app-metric is-urgent" : "app-metric"}
                 >
+                  <span className="app-metric-icon" aria-hidden="true"><k.icon /></span>
                   <p className="app-metric-label">{k.k}</p>
                   <p className="app-metric-number">{k.n}</p>
                   <p className="app-metric-note">{k.d}</p>
@@ -163,7 +164,7 @@ function AppHome() {
           <div className="app-operations-grid">
             <section className="app-editorial-panel">
               <div className="flex items-center justify-between">
-                <h2 className="font-display text-base font-black sm:text-lg">آخر ما أنجزه فريقك</h2>
+                <h2 className="flex items-center gap-2 font-display text-base font-black sm:text-lg"><CheckCircle2 className="size-5 text-jade" /> آخر ما أنجزه فريقك</h2>
                 <Link to="/app/tasks" className="app-text-link">
                   كل المهام
                 </Link>
@@ -202,7 +203,7 @@ function AppHome() {
             </section>
 
             <section className="app-editorial-panel app-running-panel">
-              <h2 className="font-display text-base font-black sm:text-lg">مهام جارية</h2>
+              <h2 className="flex items-center gap-2 font-display text-base font-black sm:text-lg"><Activity className="size-5 text-amber" /> مهام جارية</h2>
               <ul className="app-running-list">
                 {running.slice(0, 5).map((t) => (
                   <li key={t.id} className="flex items-center gap-3 text-sm">
