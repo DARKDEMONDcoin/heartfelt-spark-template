@@ -312,6 +312,8 @@ export const askEmployee = createServerFn({ method: "POST" })
     // نيّة الرسالة: عمل (مخرج جاهز) أم سؤال/دردشة يُجاب عليها فقط بلا فرض خدمات.
     const { chatIntent, intentBlock } = await import("./chat-intent");
     const intent = chatIntent(data.message);
+    // عقل الخبير: عمق التخصص + سؤال واحد بخيارات عند الغموض الجوهري فقط.
+    const { expertMindBlock } = await import("./expert-mind");
 
     // الوعي اللحظي: الزمن الدقيق دائماً + بحث حيّ عن الأحداث الجارية عند الحاجة.
     const { nowBlock, needsLiveFacts, liveFactsBlock } = await import("./live-context.server");
