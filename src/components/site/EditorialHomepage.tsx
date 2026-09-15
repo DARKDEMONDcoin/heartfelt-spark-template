@@ -152,8 +152,24 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
   return <div ref={ref} className={`sahl-reveal ${className}`}>{children}</div>;
 }
 
+/** هبوط الأجهزة من الأعلى إلى مكانها عند ظهورها — بأسلوب Stripe. */
+function useDeviceLanding<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const land = () => node.classList.add("is-landed");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { land(); return; }
+    const observer = new IntersectionObserver(([entry]) => { if (entry?.isIntersecting) { window.requestAnimationFrame(land); observer.disconnect(); } }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
 function ProductFrame({ src, mobileSrc, alt, hero = false }: { src: string; mobileSrc?: string; alt: string; hero?: boolean }) {
-  return <figure className={`sahl-device-frame${hero ? " is-hero" : ""}${mobileSrc ? " is-responsive-device" : ""}`}><div className="sahl-device-lid"><span className="sahl-device-camera" aria-hidden="true" /><span className="sahl-phone-button is-volume-up" aria-hidden="true" /><span className="sahl-phone-button is-volume-down" aria-hidden="true" /><span className="sahl-phone-button is-power" aria-hidden="true" /><div className="sahl-device-screen"><picture>{mobileSrc && <source media="(max-width: 720px)" srcSet={mobileSrc} />}<img src={src} alt={alt} loading={hero ? "eager" : "lazy"} /></picture></div></div><div className="sahl-laptop-base" aria-hidden="true"><i /></div></figure>;
+  const ref = useDeviceLanding<HTMLElement>();
+  return <figure ref={ref} className={`sahl-device-frame sahl-device-drop${hero ? " is-hero" : ""}${mobileSrc ? " is-responsive-device" : ""}`}><div className="sahl-device-lid"><span className="sahl-device-camera" aria-hidden="true" /><span className="sahl-phone-button is-volume-up" aria-hidden="true" /><span className="sahl-phone-button is-volume-down" aria-hidden="true" /><span className="sahl-phone-button is-power" aria-hidden="true" /><div className="sahl-device-screen"><picture>{mobileSrc && <source media="(max-width: 720px)" srcSet={mobileSrc} />}<img src={src} alt={alt} loading={hero ? "eager" : "lazy"} /></picture></div></div><div className="sahl-laptop-base" aria-hidden="true"><i /></div></figure>;
 }
 
 function ToolConnections() {
