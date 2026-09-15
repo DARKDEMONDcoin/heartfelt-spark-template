@@ -14908,18 +14908,31 @@ section:has(> .integration-grid-wave) {
   will-change: filter, background-color;
 }
 /* مراكز الدوائر خارج الشاشة تمامًا — الظاهر هو القوس فقط من كل زاوية */
-.sauth-glow-blob.is-one   { top: -40vmax; left: -34vmax;  background-color: #A8492C; animation: sauth-hue 18s linear infinite; }
-.sauth-glow-blob.is-two   { top: -40vmax; right: -34vmax; background-color: #C68A2E; animation: sauth-hue 18s linear infinite; animation-delay: -6s; }
-.sauth-glow-blob.is-three { bottom: -40vmax; left: -34vmax; background-color: #2F6B63; animation: sauth-hue 18s linear infinite; animation-delay: -12s; }
-.sauth-glow-blob.is-four  { bottom: -40vmax; right: -34vmax; background-color: #A8492C; animation: sauth-hue 18s linear infinite; animation-delay: -9s; }
+/* مراكز الدوائر خارج الشاشة تمامًا — الظاهر هو القوس فقط من كل زاوية */
+.sauth-glow-blob { filter: blur(110px); }
+.sauth-glow-blob.is-one   { top: -40vmax; left: -34vmax;  animation: sauth-hue-a 18s ease-in-out infinite; }
+.sauth-glow-blob.is-two   { top: -40vmax; right: -34vmax; animation: sauth-hue-b 18s ease-in-out infinite; animation-delay: -6s; }
+.sauth-glow-blob.is-three { bottom: -40vmax; left: -34vmax; animation: sauth-hue-a 18s ease-in-out infinite; animation-delay: -12s; }
+.sauth-glow-blob.is-four  { bottom: -40vmax; right: -34vmax; animation: sauth-hue-b 18s ease-in-out infinite; animation-delay: -9s; }
 
-@keyframes sauth-hue {
-  0%   { filter: blur(110px) hue-rotate(0deg); }
-  100% { filter: blur(110px) hue-rotate(360deg); }
+@keyframes sauth-hue-a {
+  0%   { background-color: #A8492C; }
+  33%  { background-color: #C68A2E; }
+  66%  { background-color: #2F6B63; }
+  100% { background-color: #A8492C; }
+}
+@keyframes sauth-hue-b {
+  0%   { background-color: #2F6B63; }
+  35%  { background-color: #A8492C; }
+  70%  { background-color: #C68A2E; }
+  100% { background-color: #2F6B63; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sauth-glow-blob { animation: none !important; filter: blur(110px); }
+  .sauth-glow-blob.is-one, .sauth-glow-blob.is-four { background-color: #A8492C; }
+  .sauth-glow-blob.is-two { background-color: #C68A2E; }
+  .sauth-glow-blob.is-three { background-color: #2F6B63; }
 }
 
 
