@@ -15074,3 +15074,48 @@ section:has(> .integration-grid-wave) {
   .sauth-center { padding: 70px 18px 32px; justify-content: flex-start; }
   .sauth-glow-blob { opacity: 0.26; }
 }
+
+/* قائمة الجوال في الهيدر: تُعرَّف ألوانها على الهيدر نفسه لأن متغيرات الصفحة محصورة في .sahl-white-home */
+.sahl-white-nav {
+  --home-bg: oklch(1 0 0);
+  --home-ink: oklch(0.20382 0.00871 59.14);
+  --home-copy: oklch(0.43 0.014 58);
+  --home-muted: oklch(0.968 0.006 66);
+  --home-line: oklch(0.905 0.008 66);
+  --home-terracotta: oklch(0.523 0.134 34.5);
+}
+@media (max-width: 1024px) {
+  .sahl-white-mobile {
+    z-index: 60;
+    direction: rtl;
+    gap: 14px;
+    padding: 20px 22px calc(22px + env(safe-area-inset-bottom));
+    background: oklch(1 0 0);
+    box-shadow: 0 24px 60px -30px oklch(0.2 0.01 59 / 0.35);
+  }
+  .sahl-white-mobile > div { gap: 4px; }
+  .sahl-white-mobile section { margin: 0; padding: 4px 0 10px; }
+  .sahl-white-mobile section > b {
+    padding: 8px 0 2px;
+    color: var(--home-copy);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .sahl-white-mobile a {
+    padding: 0 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    background: transparent;
+  }
+  .sahl-white-mobile a:active { background: var(--home-muted); }
+  .sahl-white-mobile a > span { color: var(--home-terracotta); font-size: 0.85rem; }
+  .sahl-white-mobile > [data-slot="button"],
+  .sahl-white-mobile > .inline-flex {
+    margin-top: 16px;
+    border-radius: 999px;
+    background: var(--home-terracotta);
+    color: oklch(1 0 0);
+    font-weight: 700;
+  }
+}
