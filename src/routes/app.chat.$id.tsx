@@ -561,7 +561,7 @@ const EMPLOYEE_COPY: Record<string, { prompts: string[]; greetings: string[] }> 
 
 /** أزرار الشريط العلوي المناسبة لكل موظف. */
 const BAR_BRAND = new Set(["sonny", "nour", "dana"]);
-const BAR_WORK = new Set(["sonny", "eva", "sam", "nour", "adam"]);
+const BAR_WORK = new Set(["sonny", "eva", "sam", "nour", "adam", "dana"]);
 
 function useTypewriter(lines: string[], pause = 1700) {
   const [line, setLine] = useState(0);

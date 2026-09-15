@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Clock3, Link2, ListChecks, Sparkles } from "lucide-react";
 
 import { ActivationMap } from "@/components/app/ActivationMap";
 import { AdsResultsCard } from "@/components/app/AdsResultsCard";

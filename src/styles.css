@@ -30964,7 +30964,7 @@ html { scroll-padding-top: 96px; }
 .chat-smoke i { inset: auto !important; }
 .chat-smoke i:nth-child(1) { left: -22%; top: -18%; animation: chat-roam-one 5.8s ease-in-out infinite !important; }
 .chat-smoke i:nth-child(2) { right: -24%; top: 30%; animation: chat-roam-two 6.7s ease-in-out infinite -2.1s !important; }
-.chat-smoke i:nth-child(3) { left: 18%; bottom: -24%; animation: chat-roam-three  Rup7.4s ease-in-out infinite -4s !important; }
+.chat-smoke i:nth-child(3) { left: 18%; bottom: -24%; animation: chat-roam-three 7.4s ease-in-out infinite -4s !important; }
 @keyframes chat-roam-one {
   0%,100% { opacity: 0; transform: translate3d(-10vw,-10vh,0) scale(.72); }
   14% { opacity: .3; }
