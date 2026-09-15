@@ -31,7 +31,13 @@ type Step = {
  * خريطة التفعيل: ترتيب حقيقي لما يجب أن يفعله صاحب العمل بعد التسجيل،
  * كل خطوة محسوبة من بيانات مساحة العمل الفعلية لا من قائمة ثابتة.
  */
-export function ActivationMap({ className }: { className?: string }) {
+export function ActivationMap({
+  className,
+  variant = "full",
+}: {
+  className?: string;
+  variant?: "full" | "compact";
+}) {
   const { data: workspace } = useWorkspace();
   const { data: accounts } = useConnectedAccounts(workspace?.id);
   const { data: tasks } = useTasks(workspace?.id);
