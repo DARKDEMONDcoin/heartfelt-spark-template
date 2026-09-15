@@ -15671,8 +15671,10 @@ html { scroll-padding-top: 96px; }
 .ads-platform-rail small { color: var(--command-dim); font-family: ui-monospace,monospace; font-size: .48rem; }
 .ads-platform-rail b { margin-top: .25rem; font-size: .72rem; }
 .ads-platform-rail span { margin-top: .45rem; color: var(--command-dim); font-size: .58rem; }
-.ads-platform-rail .is-connected::after { content: ""; position: absolute; inset-inline: .8rem; bottom: 0; height: 2px; background: var(--command-ink); }
-.ads-platform-rail .is-connected span { color: var(--command-ink); }
+.ads-platform-rail .is-connected::after,.ads-platform-rail .is-reporting::after { content: ""; position: absolute; inset-inline: .8rem; bottom: 0; height: 2px; background: var(--command-muted); }
+.ads-platform-rail .is-connected span,.ads-platform-rail .is-reporting span { color: var(--command-ink); }
+.ads-platform-rail .is-reporting::after { background: var(--command-ink); animation: platform-reporting 1.9s ease-in-out infinite; }
+@keyframes platform-reporting { 50% { opacity: .32; transform: scaleX(.65); } }
 .ads-report-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.35rem; border-bottom: 1px solid color-mix(in oklab, var(--background) 22%, transparent); }
 .ads-report-head p { color: color-mix(in oklab, var(--background) 58%, transparent); font-size: .66rem; font-weight: 700; }
 .ads-report-head h2 { margin-top: .2rem; font-family: var(--font-display); font-size: 1.25rem; font-weight: 900; }
@@ -15774,7 +15776,7 @@ html { scroll-padding-top: 96px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .app-metric::after, .activation-compact::after, .app-running-index, .ads-campaign-track i,
-  .chat-smoke i, .chat-smoke b, .chat-smoke span, .sahl-first-claim, .ads-chart-bars i, .app-command-head > span i { animation: none !important; }
+  .chat-smoke i, .chat-smoke b, .chat-smoke span, .sahl-first-claim, .ads-chart-bars i, .app-command-head > span i, .ads-platform-rail .is-reporting::after { animation: none !important; }
   .sahl-first-claim { background-image: none; -webkit-text-fill-color: currentColor; }
   .ads-campaign-track i { transform: none; }
   .chat-smoke { transition: none; }
