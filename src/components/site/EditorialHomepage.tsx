@@ -9,22 +9,22 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { plans } from "@/data/pricing";
 import { stories } from "@/data/stories";
-import ecommerceSector from "@/assets/sectors/ecommerce.jpg.asset.json";
-import restaurantsSector from "@/assets/sectors/restaurants.jpg.asset.json";
-import clinicsSector from "@/assets/sectors/clinics.jpg.asset.json";
-import realestateSector from "@/assets/sectors/realestate.jpg.asset.json";
-import sonnyDesktop from "@/assets/employee-screens-v2/sonny-desktop.png.asset.json";
-import sonnyMobile from "@/assets/employee-screens-v2/sonny-mobile.png.asset.json";
-import evaDesktop from "@/assets/employee-screens-v2/eva-desktop.png.asset.json";
-import evaMobile from "@/assets/employee-screens-v2/eva-mobile.png.asset.json";
-import samDesktop from "@/assets/employee-screens-v2/sam-desktop.png.asset.json";
-import samMobile from "@/assets/employee-screens-v2/sam-mobile.png.asset.json";
-import nourDesktop from "@/assets/employee-screens-v2/nour-desktop.png.asset.json";
-import nourMobile from "@/assets/employee-screens-v2/nour-mobile.png.asset.json";
-import danaDesktop from "@/assets/employee-screens-v2/dana-desktop.png.asset.json";
-import danaMobile from "@/assets/employee-screens-v2/dana-mobile.png.asset.json";
-import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png.asset.json";
-import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png.asset.json";
+import ecommerceSector from "@/assets/sectors/ecommerce.jpg";
+import restaurantsSector from "@/assets/sectors/restaurants.jpg";
+import clinicsSector from "@/assets/sectors/clinics.jpg";
+import realestateSector from "@/assets/sectors/realestate.jpg";
+import sonnyDesktop from "@/assets/employee-screens-v2/sonny-desktop.png";
+import sonnyMobile from "@/assets/employee-screens-v2/sonny-mobile.png";
+import evaDesktop from "@/assets/employee-screens-v2/eva-desktop.png";
+import evaMobile from "@/assets/employee-screens-v2/eva-mobile.png";
+import samDesktop from "@/assets/employee-screens-v2/sam-desktop.png";
+import samMobile from "@/assets/employee-screens-v2/sam-mobile.png";
+import nourDesktop from "@/assets/employee-screens-v2/nour-desktop.png";
+import nourMobile from "@/assets/employee-screens-v2/nour-mobile.png";
+import danaDesktop from "@/assets/employee-screens-v2/dana-desktop.png";
+import danaMobile from "@/assets/employee-screens-v2/dana-mobile.png";
+import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png";
+import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png";
 
 type DemoPhase = "idle" | "thinking" | "draft" | "approved";
 
