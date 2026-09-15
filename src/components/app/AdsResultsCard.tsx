@@ -59,11 +59,14 @@ export function AdsResultsCard({
       <div className="ads-platform-rail" aria-label="حالة منصات الإعلانات">
         {channels.map((channel) => {
           const connected = isConnected(channel.providers);
+          const reporting = Boolean(data) && channel.providers.some((provider) =>
+            provider === "facebook" || provider === "meta-ads" || provider === "instagram",
+          );
           return (
-            <div key={channel.code} className={connected ? "is-connected" : undefined}>
+            <div key={channel.code} className={reporting ? "is-reporting" : connected ? "is-connected" : undefined}>
               <small>{channel.code}</small>
               <b>{channel.label}</b>
-              <span>{connected ? "متصل" : "غير متصل"}</span>
+              <span>{reporting ? "يعرض الآن" : connected ? "متصل" : "غير متصل"}</span>
             </div>
           );
         })}
