@@ -15246,10 +15246,10 @@ section:has(> .integration-grid-wave) {
 .sahl-ads-metrics em { display: block; margin-top: 6px; color: var(--home-copy); font-size: .7rem; font-style: normal; }
 .sahl-ads-steps { counter-reset: ads; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; margin-top: 22px; padding: 0; list-style: none; }
 .sahl-ads-steps li { counter-increment: ads; padding-top: 16px; border-top: 2px solid color-mix(in oklab,var(--home-terracotta) 40%,transparent); }
-.sahl-ads-steps li::before { content: "٠" counter(ads); display: block; margin-bottom: 8px; color: var(--home-terracotta); font-size: .74rem; font-weight: 700; }
+.sahl-ads-steps li::before { content: "٠" counter(ads, arabic-indic); display: block; margin-bottom: 8px; color: var(--home-terracotta); font-size: .74rem; font-weight: 700; }
 .sahl-ads-steps b { display: block; color: var(--home-ink); font-size: 1rem; }
 .sahl-ads-steps span { display: block; margin-top: 7px; color: var(--home-copy); font-size: .84rem; line-height: 1.8; }
-.sahl-ads-note { display: flex; align-items: flex-start; gap: 9px; margin-top: 24px; color: var(--home-copy); font-size: .78rem; line-height: 1.8; }
+.sahl-ads-note { display: flex; align-items: flex-start; gap: 9px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--home-line); color: var(--home-copy); font-size: .78rem; line-height: 1.8; }
 .sahl-ads-note svg { flex: none; width: 15px; margin-top: 3px; color: var(--home-teal); }
 
 @media (max-width: 720px) {
