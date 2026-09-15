@@ -15103,6 +15103,8 @@ section:has(> .integration-grid-wave) {
     letter-spacing: 0.02em;
   }
   .sahl-white-mobile a {
+    justify-content: flex-start;
+    gap: 10px;
     padding: 0 12px;
     border-radius: 10px;
     font-weight: 600;
