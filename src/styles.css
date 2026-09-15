@@ -11832,7 +11832,7 @@ section:has(> .integration-grid-wave) {
 }
 .sahl-smoke-page i,
 .sahl-smoke-auth i {
-  opacity: 0.34;
+  opacity: 0.45;
   mix-blend-mode: screen;
 }
 .sahl-smoke-page + div,
@@ -11955,7 +11955,7 @@ section:has(> .integration-grid-wave) {
   }
   .sahl-smoke-app {
     height: 20rem;
-    opacity: 0.34;
+    opacity: 0.45;
   }
   .chat-stage::before,
   .chat-stage::after {
@@ -12059,7 +12059,7 @@ section:has(> .integration-grid-wave) {
     transform: translate3d(20%, 12%, 0) rotate(9deg) scale(1.18);
   }
   100% {
-    opacity: 0.34;
+    opacity: 0.45;
     transform: translate3d(11%, 1%, 0) rotate(2deg) scale(0.96);
   }
 }
@@ -14897,6 +14897,7 @@ section:has(> .integration-grid-wave) {
 }
 
 .sauth-glow { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+/* أكبر وأوضح قليلاً */
 .sauth-glow-blob {
   position: absolute;
   width: 70vw;
@@ -14905,7 +14906,7 @@ section:has(> .integration-grid-wave) {
   min-height: 460px;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.34;
+  opacity: 0.45;
   will-change: background;
 }
 .sauth-glow-blob.is-one { top: -28vw; inset-inline-start: -22vw; animation: sauth-hue-a 26s ease-in-out infinite; }
@@ -14932,7 +14933,7 @@ section:has(> .integration-grid-wave) {
   .sauth-glow-blob.is-two, .sauth-glow-blob.is-three { background: radial-gradient(closest-side, #2F6B63, transparent 70%); }
 }
 
-.sauth-topbar { position: relative; z-index: 1; padding: 22px 26px; }
+.sauth-topbar { position: relative; z-index: 1; padding: 22px 26px; display: flex; justify-content: flex-end; }
 .sauth-logo { display: inline-flex; align-items: center; color: #A8492C; }
 
 .sauth-center {
