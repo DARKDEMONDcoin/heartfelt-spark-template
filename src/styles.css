@@ -14908,7 +14908,6 @@ section:has(> .integration-grid-wave) {
   will-change: filter, background-color;
 }
 /* مراكز الدوائر خارج الشاشة تمامًا — الظاهر هو القوس فقط من كل زاوية */
-/* مراكز الدوائر خارج الشاشة تمامًا — الظاهر هو القوس فقط من كل زاوية */
 .sauth-glow-blob { filter: blur(110px); }
 .sauth-glow-blob.is-one   { top: -40vmax; left: -34vmax;  animation: sauth-hue-a 18s ease-in-out infinite; }
 .sauth-glow-blob.is-two   { top: -40vmax; right: -34vmax; animation: sauth-hue-b 18s ease-in-out infinite; animation-delay: -6s; }
