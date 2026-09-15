@@ -25,6 +25,8 @@ import danaDesktop from "@/assets/employee-screens-v2/dana-desktop.png";
 import danaMobile from "@/assets/employee-screens-v2/dana-mobile.png";
 import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png";
 import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png";
+import planFlowWide from "@/assets/product/plan-flow-wide.png";
+import planFlowTall from "@/assets/product/plan-flow-tall.png";
 
 type DemoPhase = "idle" | "thinking" | "draft" | "approved";
 
