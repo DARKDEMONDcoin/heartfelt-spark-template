@@ -14107,6 +14107,10 @@ section:has(> .integration-grid-wave) {
   .sahl-member-hero > div[aria-hidden]:first-child { inset: -180px -170px auto 28%; height: 510px; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .sahl-page-ribbon { animation: none; }
+}
+
 /* Stripe geometry pass — preserve Sahl's white, gold and ink identity */
 @media (min-width: 1025px) {
   .stripe-sahl-hero-inner {
