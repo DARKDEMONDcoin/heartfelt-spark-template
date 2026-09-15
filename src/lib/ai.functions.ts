@@ -14,6 +14,7 @@ import {
   researchFor,
 } from "@/lib/nour-run.server";
 import { employeeDirectory, sharedSystemBlocks, type EmployeeId } from "@/lib/team-knowledge";
+import { adsPlaybookBlock as adsPlaybook, isAdsRequest as adsPlaybookIsRelevant } from "@/lib/ads-playbook";
 import { socialPlaybookBlock } from "@/lib/social-playbook";
 import { seoPlaybookBlock } from "@/lib/seo-playbook";
 
@@ -427,6 +428,9 @@ export const askEmployee = createServerFn({ method: "POST" })
         : "",
       craft[data.employeeId] ? `## معايير حِرفتك\n${craft[data.employeeId]}` : "",
       data.employeeId === "sonny" ? socialPlaybookBlock : "",
+      data.employeeId === "sonny" || ((data.employeeId === "adam" || data.employeeId === "dana") && adsPlaybookIsRelevant(data.message))
+        ? adsPlaybook()
+        : "",
       data.employeeId === "nour" ? seoPlaybookBlock : "",
       sirajMemory,
       nourMemory,
