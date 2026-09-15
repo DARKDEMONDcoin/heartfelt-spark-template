@@ -15340,7 +15340,7 @@ section:has(> .integration-grid-wave) {
 }
 
 @media (max-width: 720px) {
-  .sahl-hero-product { margin-inline: auto; width: 86%; }
-  .sahl-hero-product .sahl-device-frame.is-hero img { max-height: 430px; object-fit: cover; object-position: center top; }
+  .sahl-hero-product { margin-inline: auto; width: 68%; }
+  .sahl-hero-product .sahl-device-frame.is-hero img { max-height: none; object-fit: contain; }
   .sahl-hero-product .sahl-float-note { position: static; margin-top: 14px; min-width: 0; width: 100%; animation: none; }
 }
