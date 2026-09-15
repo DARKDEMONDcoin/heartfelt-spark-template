@@ -30895,3 +30895,23 @@ html { scroll-padding-top: 96px; }
   .chat-smoke i { opacity: .1; transform: none; }
   .chat-smoke b, .chat-smoke span { opacity: .08; transform: none; }
 }
+
+/* Polishing Activation Map Icons */
+.activation-map-icon {
+  transition: all 0.3s ease;
+}
+
+/* Lightening First Run */
+.app-first-run::before {
+  display: none;
+}
+.app-first-run {
+  border-top: 3px solid var(--primary);
+  border-radius: 20px !important;
+}
+
+/* Polishing Business Profile Card */
+.business-profile-card {
+  box-shadow: var(--shadow-card);
+  border-radius: 20px !important;
+}

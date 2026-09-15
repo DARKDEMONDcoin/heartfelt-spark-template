@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Clock3, Link2, ListChecks } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2, Sparkles } from "lucide-react";
 
 import { ActivationMap } from "@/components/app/ActivationMap";
 import { AdsResultsCard } from "@/components/app/AdsResultsCard";
@@ -41,7 +41,7 @@ function FirstRun({ workspace }: { workspace: { id: string } | null }) {
   return (
     <>
       <section className="app-editorial-panel app-first-run">
-        <p className="app-editorial-kicker">ابدأ من هنا</p>
+        <p className="app-editorial-kicker flex items-center gap-1.5"><Sparkles className="size-3 text-primary" /> ابدأ من هنا</p>
         <h2 className="mt-1.5 font-display text-xl font-black sm:text-2xl">
           اطلب أول عمل من فريقك
         </h2>
