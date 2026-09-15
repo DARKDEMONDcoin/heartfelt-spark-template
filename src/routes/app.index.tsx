@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Activity, CheckCircle2 } from "lucide-react";
 
 import { ActivationMap } from "@/components/app/ActivationMap";
 import { AdsResultsCard } from "@/components/app/AdsResultsCard";
@@ -137,7 +137,7 @@ function AppHome() {
           <section className="app-command-head">
             <div>
               <p>SAHL / EXECUTIVE CONTROL</p>
-              <h2>مركز قيادة العمل والنتائج</h2>
+              <h2 className="flex items-center gap-2.5"> <LayoutDashboard className="size-6 text-primary" /> مركز قيادة العمل والنتائج </h2>
             </div>
             <span><i /> تحديث مباشر من حساباتك</span>
           </section>
@@ -163,7 +163,7 @@ function AppHome() {
           <div className="app-operations-grid">
             <section className="app-editorial-panel">
               <div className="flex items-center justify-between">
-                <h2 className="font-display text-base font-black sm:text-lg">آخر ما أنجزه فريقك</h2>
+                <h2 className="flex items-center gap-2 font-display text-base font-black sm:text-lg"><CheckCircle2 className="size-5 text-jade" /> آخر ما أنجزه فريقك</h2>
                 <Link to="/app/tasks" className="app-text-link">
                   كل المهام
                 </Link>
@@ -202,7 +202,7 @@ function AppHome() {
             </section>
 
             <section className="app-editorial-panel app-running-panel">
-              <h2 className="font-display text-base font-black sm:text-lg">مهام جارية</h2>
+              <h2 className="flex items-center gap-2 font-display text-base font-black sm:text-lg"><Activity className="size-5 text-amber" /> مهام جارية</h2>
               <ul className="app-running-list">
                 {running.slice(0, 5).map((t) => (
                   <li key={t.id} className="flex items-center gap-3 text-sm">
