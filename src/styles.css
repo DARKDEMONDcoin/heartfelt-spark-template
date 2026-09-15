@@ -15455,3 +15455,8 @@ html { scroll-padding-top: 96px; }
   .sahl-proof-ledger i, .sahl-visual-sweep, .sahl-visual-ring, .sahl-visual-orbit i { animation: none; }
   .sahl-visual-sweep, .sahl-visual-ring { opacity: 0; }
 }
+
+@media (max-width: 1080px) {
+  .sahl-device-frame.is-hero.sahl-device-drop { transform: translate3d(0,-64px,0) scale(.965); }
+  .sahl-device-frame.is-hero.sahl-device-drop.is-landed { transform: none; }
+}
