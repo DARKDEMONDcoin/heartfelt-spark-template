@@ -24,12 +24,12 @@ export function CtaFooter() {
                 >
                   وظّف فريقك الآن
                 </Link>
-                <a
-                  href="#pricing"
+                <Link
+                  to="/pricing"
                   className="inline-flex items-center rounded-full border border-white/60 bg-white/15 px-7 py-4 font-semibold text-white backdrop-blur transition-colors hover:bg-white/25"
                 >
                   شاهد الأسعار
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -110,7 +110,7 @@ function AppHome() {
     : "فريقك جاهز — ابدأ بطلب واحد.";
 
   return (
-    <AppShell title={`أهلاً ${profile?.full_name ?? ""} 👋`} lead={lead}>
+    <AppShell title={`أهلاً ${profile?.full_name ?? ""}`} lead={lead}>
       {broken.length ? (
         <div className="app-system-alert">
           <span className="app-system-alert-label">تنبيه</span>
@@ -133,7 +133,14 @@ function AppHome() {
       ) : !started ? (
         <FirstRun workspace={workspace ?? null} />
       ) : (
-        <div className="space-y-4">
+        <div className="app-command-center space-y-4">
+          <section className="app-command-head">
+            <div>
+              <p>SAHL / EXECUTIVE CONTROL</p>
+              <h2>مركز قيادة العمل والنتائج</h2>
+            </div>
+            <span><i /> تحديث مباشر من حساباتك</span>
+          </section>
           {kpis.length ? (
             <section className="app-metric-strip" aria-label="ملخص مساحة العمل">
               {kpis.map((k) => (
@@ -151,7 +158,7 @@ function AppHome() {
 
           <ActivationMap variant="compact" />
 
-          {workspace ? <AdsResultsCard workspaceId={workspace.id} /> : null}
+          {workspace ? <AdsResultsCard workspaceId={workspace.id} integrations={integrations ?? []} /> : null}
 
           <div className="app-operations-grid">
             <section className="app-editorial-panel">
