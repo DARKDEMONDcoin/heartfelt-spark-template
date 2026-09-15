@@ -14473,7 +14473,7 @@ section:has(> .integration-grid-wave) {
 .sahl-live-metric b { font-family: inherit; font-weight: 500; }
 .sahl-hero h1 { margin-top: 62px; color: var(--home-ink); font-size: clamp(4.4rem, 7.2vw, 7.5rem); line-height: 1.02; font-weight: 600; }
 .sahl-hero h1 em { color: var(--home-terracotta); font-style: normal; font-weight: 500; }
-.sahl-first-claim { width: fit-content; max-width: 100%; margin-top: 22px !important; padding: 9px 16px; border: 1px solid color-mix(in oklab,var(--home-terracotta) 30%,var(--home-line)); border-radius: 999px; background: color-mix(in oklab,var(--home-bg) 78%,var(--home-gold)); color: var(--home-ink); font-size: .95rem; font-weight: 800; letter-spacing: -.01em; }
+.sahl-first-claim { width: fit-content; max-width: 100%; margin-top: 28px !important; color: var(--home-terracotta); font-family: "Almarai", "IBM Plex Sans Arabic", sans-serif; font-size: clamp(1.15rem, 1.8vw, 1.55rem); font-weight: 800; line-height: 1.5; }
 .sahl-lead { max-width: 590px; margin-top: 20px !important; color: var(--home-copy); font-size: 1.08rem; line-height: 1.85; }
 .sahl-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
 .sahl-actions [data-slot="button"], .sahl-actions .inline-flex { min-height: 52px; padding-inline: 26px; border-radius: 6px; background: var(--home-terracotta); color: var(--home-bg); text-decoration: none; }
@@ -14777,7 +14777,9 @@ section:has(> .integration-grid-wave) {
   .sahl-white-nav-inner { height: 82px; direction: ltr; }
   .sahl-white-brand { font-size: 1.5rem; }
   .sahl-white-brand img { display: none; }
-  .sahl-white-menu { width: 50px; height: 50px; margin-inline-start: auto; border: 1px solid var(--home-line) !important; border-radius: 7px; background: var(--home-bg) !important; color: var(--home-terracotta) !important; box-shadow: 0 10px 28px -18px var(--home-ink); }
+  .sahl-white-menu { width: 40px; height: 40px; margin-inline-start: auto; border: 0 !important; border-radius: 0; background: transparent !important; color: var(--home-ink) !important; box-shadow: none; }
+  .sahl-white-menu:hover, .sahl-white-menu:focus-visible { background: transparent !important; color: var(--home-ink) !important; }
+  .sahl-white-menu svg { width: 25px; height: 25px; stroke-width: 2.4; }
   .sahl-white-mobile { inset-block-start: 82px; }
   .sahl-hero { min-height: 1035px; padding: 0 0 76px; }
   .sahl-hero-ribbon { inset: -95px -160px auto 28%; height: 600px; transform: skewX(-18deg) rotate(-10deg); animation-name: sahl-ribbon-drift-mobile; }
@@ -14805,14 +14807,9 @@ section:has(> .integration-grid-wave) {
   .sahl-cap-card .sahl-device-frame, .sahl-cap-card.is-wide .sahl-device-frame { width: min(74%,280px); margin: 28px auto 30px; padding-bottom: 0; filter: drop-shadow(0 24px 24px oklch(.2 .01 59 / .2)); }
   .sahl-cap-card:hover .sahl-device-frame { transform: none; }
   .sahl-device-frame.is-responsive-device .sahl-device-lid { overflow: visible; border: 7px solid oklch(.22 .008 59); border-radius: 37px; padding: 5px; background: linear-gradient(145deg,oklch(.48 .01 59),oklch(.17 .006 59) 30%,oklch(.37 .01 59)); box-shadow: inset 0 0 0 1px oklch(1 0 0 / .3), inset 0 0 0 4px oklch(.1 .004 59); }
-  .sahl-device-frame.is-responsive-device .sahl-device-screen { overflow: hidden; border-radius: 27px; padding-top: 30px; background: var(--screen-top,var(--home-bg)); }
-  .sahl-cap-card.is-terracotta { --screen-top: var(--home-terracotta); }
-  .sahl-cap-card.is-teal { --screen-top: var(--home-teal); }
-  .sahl-cap-card.is-gold { --screen-top: var(--home-gold); }
+  .sahl-device-frame.is-responsive-device .sahl-device-screen { overflow: hidden; border-radius: 27px; padding: 0; background: var(--home-bg); }
   .sahl-device-frame.is-responsive-device img { width: 100%; height: auto; aspect-ratio: 390/844; object-fit: contain; object-position: center top; }
   .sahl-device-frame.is-responsive-device .sahl-device-camera { display: none; }
-  .sahl-device-frame.is-responsive-device .sahl-phone-island { position: absolute; z-index: 5; top: 12px; left: 50%; display: block; width: 31%; height: 20px; border-radius: 999px; background: oklch(.08 .004 59); transform: translateX(-50%); box-shadow: inset 0 -1px 0 oklch(1 0 0 / .08); }
-  .sahl-device-frame.is-responsive-device .sahl-phone-island::after { content: ""; position: absolute; top: 7px; right: 14%; width: 5px; height: 5px; border-radius: 50%; background: oklch(.22 .035 250); box-shadow: 0 0 0 1px oklch(.02 0 0); }
   .sahl-device-frame.is-responsive-device .sahl-phone-button { position: absolute; z-index: 1; display: block; width: 3px; border-radius: 2px; background: oklch(.33 .008 59); }
   .sahl-device-frame.is-responsive-device .sahl-phone-button.is-volume-up { top: 105px; left: -10px; height: 44px; }
   .sahl-device-frame.is-responsive-device .sahl-phone-button.is-volume-down { top: 160px; left: -10px; height: 60px; }
