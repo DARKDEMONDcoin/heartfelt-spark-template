@@ -14899,36 +14899,41 @@ section:has(> .integration-grid-wave) {
 .sauth-glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .sauth-glow-blob {
   position: absolute;
-  width: 62vmax;
-  height: 62vmax;
-  min-width: 520px;
-  min-height: 520px;
+  width: 64vmax;
+  height: 64vmax;
+  min-width: 540px;
+  min-height: 540px;
   border-radius: 50%;
-  filter: blur(110px);
   opacity: 0.45;
-  will-change: transform;
+  will-change: filter, background-color;
 }
-.sauth-glow-blob.is-one   { top: -22vmax; left: -18vmax;  background: #A8492C; animation: sauth-drift-a 17s ease-in-out infinite; }
-.sauth-glow-blob.is-two   { top: -24vmax; right: -20vmax; background: #C68A2E; animation: sauth-drift-b 19s ease-in-out infinite; animation-delay: -4s; }
-.sauth-glow-blob.is-three { bottom: -26vmax; left: -20vmax; background: #2F6B63; animation: sauth-drift-b 15s ease-in-out infinite; animation-delay: -8s; }
-.sauth-glow-blob.is-four  { bottom: -22vmax; right: -18vmax; background: #A8492C; animation: sauth-drift-a 20s ease-in-out infinite; animation-delay: -12s; }
+/* مراكز الدوائر خارج الشاشة تمامًا — الظاهر هو القوس فقط من كل زاوية */
+.sauth-glow-blob { filter: blur(110px); }
+.sauth-glow-blob.is-one   { top: -40vmax; left: -34vmax;  animation: sauth-hue-a 18s ease-in-out infinite; }
+.sauth-glow-blob.is-two   { top: -40vmax; right: -34vmax; animation: sauth-hue-b 18s ease-in-out infinite; animation-delay: -6s; }
+.sauth-glow-blob.is-three { bottom: -40vmax; left: -34vmax; animation: sauth-hue-a 18s ease-in-out infinite; animation-delay: -12s; }
+.sauth-glow-blob.is-four  { bottom: -40vmax; right: -34vmax; animation: sauth-hue-b 18s ease-in-out infinite; animation-delay: -9s; }
 
-@keyframes sauth-drift-a {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  33%  { transform: translate3d(160px, 110px, 0) scale(1.08); }
-  66%  { transform: translate3d(70px, 190px, 0) scale(0.96); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+@keyframes sauth-hue-a {
+  0%   { background-color: #A8492C; }
+  33%  { background-color: #C68A2E; }
+  66%  { background-color: #2F6B63; }
+  100% { background-color: #A8492C; }
 }
-@keyframes sauth-drift-b {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  30%  { transform: translate3d(-150px, 130px, 0) scale(1.06); }
-  65%  { transform: translate3d(-60px, -120px, 0) scale(0.98); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+@keyframes sauth-hue-b {
+  0%   { background-color: #2F6B63; }
+  35%  { background-color: #A8492C; }
+  70%  { background-color: #C68A2E; }
+  100% { background-color: #2F6B63; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sauth-glow-blob { animation: none !important; }
+  .sauth-glow-blob { animation: none !important; filter: blur(110px); }
+  .sauth-glow-blob.is-one, .sauth-glow-blob.is-four { background-color: #A8492C; }
+  .sauth-glow-blob.is-two { background-color: #C68A2E; }
+  .sauth-glow-blob.is-three { background-color: #2F6B63; }
 }
+
 
 
 .sauth-topbar { position: absolute; top: 0; left: 0; z-index: 2; padding: 22px 26px; }
