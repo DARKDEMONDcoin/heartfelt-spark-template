@@ -15391,3 +15391,67 @@ section:has(> .integration-grid-wave) {
   .sahl-hero-product .sahl-device-frame.is-hero img { max-height: none; object-fit: contain; }
   .sahl-hero-product .sahl-float-note { position: static; margin-top: 14px; min-width: 0; width: 100%; animation: none; }
 }
+
+/* ===== هبوط الأجهزة + مشاهد متحركة جديدة + سلاسة التمرير ===== */
+html { scroll-padding-top: 96px; }
+.sahl-white-home { overflow-x: clip; }
+
+/* الأجهزة تنزل من الأعلى إلى مكانها — بأسلوب Stripe */
+.sahl-device-drop { opacity: 0; transform: translate3d(0,-72px,0) scale(.965); transition: opacity .9s cubic-bezier(.16,.84,.3,1), transform 1.05s cubic-bezier(.16,.84,.3,1); will-change: transform, opacity; }
+.sahl-device-drop.is-landed { opacity: 1; transform: translate3d(0,0,0) scale(1); will-change: auto; }
+.sahl-device-frame.is-hero.sahl-device-drop { transform: translate3d(0,-88px,0) rotateY(5deg) rotateX(1deg) scale(.96); }
+.sahl-device-frame.is-hero.sahl-device-drop.is-landed { transform: translate3d(0,0,0) rotateY(5deg) rotateX(1deg) scale(1); }
+.sahl-cap-card .sahl-device-frame.sahl-device-drop.is-landed { transform: none; }
+
+/* إيقاف الحركة خارج الشاشة = تمرير أنعم */
+.sahl-scene:not(.is-onscreen) *, .sahl-scene:not(.is-onscreen) *::before, .sahl-scene:not(.is-onscreen) *::after { animation-play-state: paused !important; }
+
+/* قسم الإثباتات الداكن */
+.sahl-proof { position: relative; overflow: hidden; }
+.sahl-proof .sahl-dark-veil { background: radial-gradient(circle at 18% 12%, color-mix(in oklab,var(--home-teal) 20%,transparent), transparent 44%), radial-gradient(circle at 86% 88%, color-mix(in oklab,var(--home-gold) 16%,transparent), transparent 46%); }
+.sahl-proof-ledger { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .32; }
+.sahl-proof-ledger i { position: absolute; inset-inline: 6%; height: 1px; background: repeating-linear-gradient(90deg, color-mix(in oklab,var(--home-bg) 40%,transparent) 0 3px, transparent 3px 16px); animation: sahl-ledger-tick 7.5s ease-in-out infinite; }
+.sahl-proof-ledger i:nth-child(1) { top: 14%; }
+.sahl-proof-ledger i:nth-child(2) { top: 28%; animation-delay: -1.1s; }
+.sahl-proof-ledger i:nth-child(3) { top: 44%; animation-delay: -2.4s; }
+.sahl-proof-ledger i:nth-child(4) { top: 60%; animation-delay: -3.6s; }
+.sahl-proof-ledger i:nth-child(5) { top: 76%; animation-delay: -4.8s; }
+.sahl-proof-ledger i:nth-child(6) { top: 90%; animation-delay: -6s; }
+@keyframes sahl-ledger-tick { 0%,100% { opacity: .25; transform: translateX(0); } 50% { opacity: .8; transform: translateX(-14px); } }
+.sahl-proof .sahl-shell { position: relative; z-index: 2; }
+.sahl-proof .sahl-proof-grid article { border-color: color-mix(in oklab,var(--home-bg) 15%,transparent); background: color-mix(in oklab,var(--home-bg) 6%,transparent); backdrop-filter: blur(6px); }
+.sahl-proof .sahl-proof-grid article h3 { color: var(--home-bg); }
+.sahl-proof .sahl-proof-grid article p { color: color-mix(in oklab,var(--home-bg) 66%,transparent); }
+.sahl-proof .sahl-proof-grid article span { background: color-mix(in oklab,var(--home-gold) 22%,transparent); color: color-mix(in oklab,var(--home-gold) 40%,var(--home-bg)); }
+
+/* لوحات الصور الجديدة */
+.sahl-proof-visual { margin-top: 40px; }
+.sahl-proof-visual figure, .sahl-ads-visual figure { position: relative; margin: 0; border: 1px solid color-mix(in oklab,var(--home-ink) 12%,transparent); border-radius: 18px; overflow: hidden; background: var(--home-bg); }
+.sahl-proof-visual figure { border-color: color-mix(in oklab,var(--home-bg) 16%,transparent); }
+.sahl-proof-visual img, .sahl-ads-visual img { display: block; width: 100%; height: auto; }
+.sahl-proof-visual figcaption { margin-top: 14px; color: color-mix(in oklab,var(--home-bg) 62%,transparent); font-size: .82rem; }
+.sahl-visual-sweep { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 40%, color-mix(in oklab,var(--home-bg) 42%,transparent) 50%, transparent 60%); mix-blend-mode: overlay; animation: sahl-visual-sweep 9s ease-in-out infinite; }
+@keyframes sahl-visual-sweep { 0% { transform: translateX(-60%); opacity: 0; } 18% { opacity: 1; } 60% { transform: translateX(60%); opacity: 0; } 100% { transform: translateX(60%); opacity: 0; } }
+.sahl-visual-ring { position: absolute; inset-inline-start: 8%; top: 12%; width: 120px; height: 120px; border: 1px solid color-mix(in oklab,var(--home-gold) 55%,transparent); border-radius: 50%; pointer-events: none; animation: sahl-visual-ring 6s ease-out infinite; }
+@keyframes sahl-visual-ring { 0% { transform: scale(.6); opacity: 0; } 25% { opacity: .75; } 100% { transform: scale(1.9); opacity: 0; } }
+.sahl-ads-visual { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 28px; margin-top: 40px; }
+.sahl-ads-visual > div span { display: inline-block; padding: 5px 11px; border-radius: 999px; background: color-mix(in oklab,var(--home-terracotta) 12%,transparent); color: var(--home-terracotta); font-size: .72rem; font-weight: 700; }
+.sahl-ads-visual > div h3 { margin-top: 14px; font-size: clamp(1.4rem,2.4vw,1.85rem); line-height: 1.4; color: var(--home-ink); }
+.sahl-ads-visual > div p { margin-top: 12px; color: var(--home-copy); font-size: .95rem; line-height: 1.9; }
+.sahl-visual-orbit { position: absolute; inset: 0; pointer-events: none; }
+.sahl-visual-orbit i { position: absolute; inset-inline-end: 16%; top: 24%; width: 10px; height: 10px; border-radius: 50%; background: var(--home-terracotta); box-shadow: 0 0 0 6px color-mix(in oklab,var(--home-terracotta) 16%,transparent); animation: sahl-orbit-float 7s ease-in-out infinite; }
+.sahl-visual-orbit i:nth-child(2) { inset-inline-end: 34%; top: 62%; background: var(--home-teal); box-shadow: 0 0 0 6px color-mix(in oklab,var(--home-teal) 16%,transparent); animation-delay: -2.3s; }
+.sahl-visual-orbit i:nth-child(3) { inset-inline-end: 62%; top: 38%; background: var(--home-gold); box-shadow: 0 0 0 6px color-mix(in oklab,var(--home-gold) 18%,transparent); animation-delay: -4.6s; }
+@keyframes sahl-orbit-float { 0%,100% { transform: translate3d(0,0,0); opacity: .55; } 50% { transform: translate3d(0,-16px,0); opacity: 1; } }
+
+@media (max-width: 860px) {
+  .sahl-ads-visual { grid-template-columns: 1fr; }
+  .sahl-visual-ring { width: 78px; height: 78px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sahl-device-drop, .sahl-device-frame.is-hero.sahl-device-drop { opacity: 1; transform: none; transition: none; }
+  .sahl-device-frame.is-hero.sahl-device-drop.is-landed { transform: rotateY(5deg) rotateX(1deg); }
+  .sahl-proof-ledger i, .sahl-visual-sweep, .sahl-visual-ring, .sahl-visual-orbit i { animation: none; }
+  .sahl-visual-sweep, .sahl-visual-ring { opacity: 0; }
+}
