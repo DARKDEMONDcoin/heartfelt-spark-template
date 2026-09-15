@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Check, ArrowLeft, Settings, Link2, MessageSquare, CheckSquare, Zap, BarChart } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import {
   useBrainItems,
@@ -19,7 +20,7 @@ type StepTo =
   | "/app/rankings";
 
 type Step = {
-  icon: React.ElementType;
+  icon: LucideIcon;
   id: string;
   title: string;
   lead: string;
