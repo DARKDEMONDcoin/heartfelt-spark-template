@@ -15060,6 +15060,6 @@ section:has(> .integration-grid-wave) {
   .sauth-card { background: transparent; border: 0; box-shadow: none; }
   .sauth-card-body { padding: 8px 4px 18px; }
   .sauth-card-foot { background: transparent; border-top: 1px solid #EFE7DA; padding: 16px 4px 0; }
-  .sauth-center { padding: 8px 18px 32px; justify-content: flex-start; }
+  .sauth-center { padding: 70px 18px 32px; justify-content: flex-start; }
   .sauth-glow-blob { opacity: 0.26; }
 }
