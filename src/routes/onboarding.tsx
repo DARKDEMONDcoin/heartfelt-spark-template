@@ -180,7 +180,7 @@ function Onboarding() {
         }
       }
 
-      void navigate({ to: "/app" });
+      void navigate({ to: "/app/chat" });
     } finally {
       setSaving(false);
     }
