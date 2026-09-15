@@ -14533,7 +14533,7 @@ section:has(> .integration-grid-wave) {
 .sahl-cap-card .sahl-coming-ads p { margin-top: 7px; color: var(--home-copy); font-size: .75rem; line-height: 1.7; }
 .sahl-cap-card a { margin-top: 24px; display: inline-flex; align-items: center; gap: 8px; color: var(--home-ink); font-size: .8rem; font-weight: 700; text-decoration: none; }
 .sahl-cap-card a svg { width: 15px; }
-.sahl-cap-card .sahl-device-frame { margin: 8px 42px -7% 42px; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+.sahl-cap-card .sahl-device-frame { margin: 8px 42px 36px 42px; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
 .sahl-cap-card.is-wide .sahl-device-frame { margin: 46px 2% 46px 48px; }
 .sahl-cap-card:hover .sahl-device-frame { transform: translateY(-8px); }
 .sahl-cap-card.is-terracotta { background: color-mix(in oklab,var(--home-terracotta) 7%,var(--home-bg)); }
