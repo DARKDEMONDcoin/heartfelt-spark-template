@@ -30896,6 +30896,107 @@ html { scroll-padding-top: 96px; }
   .chat-smoke b, .chat-smoke span { opacity: .08; transform: none; }
 }
 
+/* ===== مركز القيادة الفاتح — بطاقات تنفيذية وهوية المنصات ===== */
+.app-command-center {
+  border-color: var(--border);
+  border-radius: 1.25rem;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: var(--shadow-card);
+}
+.app-command-head {
+  background: color-mix(in oklab, var(--secondary) 62%, var(--background));
+}
+.app-command-center .app-metric,
+.app-command-center .app-metric.is-urgent,
+.app-command-center .app-running-panel,
+.ads-report {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+}
+.app-metric-icon {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: .9rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: .65rem;
+  background: var(--secondary);
+  color: var(--jade-deep);
+}
+.app-metric-icon svg { width: 1rem; height: 1rem; }
+.app-command-center .app-metric.is-urgent .app-metric-icon { color: var(--gold-deep); }
+.ads-report { border-color: var(--border); box-shadow: none; }
+.ads-report-head { border-color: var(--border); }
+.ads-report-head p,
+.ads-report-head > span,
+.ads-report-metrics p,
+.ads-campaign-line b { color: var(--muted-foreground); }
+.ads-platform-rail { gap: .65rem; padding: .8rem; background: var(--secondary); }
+.ads-platform-rail > div {
+  min-height: 4.4rem;
+  padding: .75rem !important;
+  border: 1px solid var(--border) !important;
+  border-radius: .85rem;
+  background: var(--background);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.ads-platform-rail > div:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.ads-platform-rail > div::after { inset-inline: .75rem !important; }
+.ads-platform-rail > div > div:first-child {
+  border: 1px solid var(--border);
+  background: var(--background);
+}
+.ads-report-metrics > div { position: relative; background: var(--background); }
+.ads-report-metrics p { font-weight: 750; }
+.ads-report-metrics p svg { color: var(--jade-deep); }
+.ads-chart-bars i,
+.ads-campaign-track i { background: var(--jade); }
+.ads-empty-state > a {
+  border-radius: .7rem;
+  background: var(--foreground);
+  color: var(--background);
+}
+.app-running-panel .app-text-link { color: var(--foreground); }
+
+/* سحب الدخان في كل الاتجاهات مع فترات اختفاء قبل أول إرسال. */
+.chat-smoke i { inset: auto !important; }
+.chat-smoke i:nth-child(1) { left: -22%; top: -18%; animation: chat-roam-one 5.8s ease-in-out infinite !important; }
+.chat-smoke i:nth-child(2) { right: -24%; top: 30%; animation: chat-roam-two 6.7s ease-in-out infinite -2.1s !important; }
+.chat-smoke i:nth-child(3) { left: 18%; bottom: -24%; animation: chat-roam-three  Rup7.4s ease-in-out infinite -4s !important; }
+@keyframes chat-roam-one {
+  0%,100% { opacity: 0; transform: translate3d(-10vw,-10vh,0) scale(.72); }
+  14% { opacity: .3; }
+  42% { opacity: .1; transform: translate3d(66vw,28vh,0) scale(1.12); }
+  58% { opacity: 0; }
+  78% { opacity: .28; transform: translate3d(22vw,74vh,0) scale(.9); }
+}
+@keyframes chat-roam-two {
+  0%,100% { opacity: 0; transform: translate3d(10vw,-8vh,0) scale(.75); }
+  20% { opacity: .26; transform: translate3d(-62vw,18vh,0) scale(1.08); }
+  48% { opacity: 0; }
+  72% { opacity: .3; transform: translate3d(-24vw,52vh,0) scale(.92); }
+  88% { opacity: .08; }
+}
+@keyframes chat-roam-three {
+  0%,100% { opacity: 0; transform: translate3d(-12vw,14vh,0) scale(.8); }
+  18% { opacity: .28; transform: translate3d(42vw,-72vh,0) scale(1.12); }
+  46% { opacity: .06; }
+  62% { opacity: 0; }
+  82% { opacity: .25; transform: translate3d(-18vw,-34vh,0) scale(.95); }
+}
+
+@media (max-width: 640px) {
+  .ads-platform-rail { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ads-platform-rail > div:nth-child(n) { border: 1px solid var(--border) !important; }
+  .app-metric-icon { margin-bottom: .65rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-smoke i { animation: none !important; opacity: .1; }
+}
+
 /* Polishing Activation Map Icons */
 .activation-map-icon {
   transition: all 0.3s ease;
