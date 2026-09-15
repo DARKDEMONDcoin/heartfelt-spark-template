@@ -937,16 +937,15 @@ function ChatView({
             } as React.CSSProperties
           }
         >
-          {(messages ?? []).length === 0 && !pending ? (
-            <div className="chat-smoke" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-              <b />
-              <b />
-              <b />
-            </div>
-          ) : null}
+          <div className="chat-smoke" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <b />
+            <b />
+            <b />
+            <span /><span /><span /><span /><span />
+          </div>
           <div className="chat-message-column relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-3 sm:px-6">
             {(messages ?? []).length === 0 && !pending ? (
               <div className="chat-welcome animate-pop-in">

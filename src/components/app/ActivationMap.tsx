@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Check, ArrowLeft, Circle } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 
 import {
   useBrainItems,
@@ -115,18 +115,18 @@ export function ActivationMap({
       <Link
         to={next.to}
         className={cn(
-          "flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-card transition-colors hover:bg-secondary/40",
+          "activation-compact",
           className,
         )}
       >
-        <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-secondary text-[0.72rem] font-black tabular-nums">
+        <span className="activation-count">
           {doneCount}/{steps.length}
         </span>
         <span className="min-w-0 flex-1">
           <span className="block truncate text-sm font-bold">الخطوة التالية: {next.title}</span>
           <span className="mt-0.5 block truncate text-xs text-muted-foreground">{next.lead}</span>
         </span>
-        <span className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-primary">
+        <span className="activation-cta">
           {next.cta} <ArrowLeft className="size-3.5" />
         </span>
       </Link>
@@ -156,8 +156,8 @@ export function ActivationMap({
         </div>
         <div className="h-1.5 overflow-hidden rounded-full bg-secondary sm:col-span-2">
           <div
-            className="h-full rounded-full transition-[width] duration-700"
-            style={{ width: `${pct}%`, backgroundImage: "var(--gradient-aurora)" }}
+            className="h-full rounded-full bg-foreground transition-[width] duration-700"
+            style={{ width: `${pct}%` }}
           />
         </div>
       </div>
@@ -168,14 +168,14 @@ export function ActivationMap({
             key={s.id}
             className={cn(
               "flex items-start gap-3 rounded-2xl border p-3.5 transition-colors sm:p-4",
-              s.done ? "border-jade/30 bg-jade/8" : "border-border/70 hover:bg-secondary/40",
+              s.done ? "border-foreground/15 bg-secondary/40" : "border-border/70 hover:bg-secondary/40",
               s.id === next.id && "border-foreground/40 bg-secondary/50",
             )}
           >
             <span
               className={cn(
                 "mt-0.5 grid size-6 shrink-0 place-items-center rounded-lg text-[0.7rem] font-black",
-                s.done ? "bg-jade text-background" : "bg-secondary text-ink-soft",
+                s.done ? "bg-foreground text-background" : "bg-secondary text-ink-soft",
               )}
             >
               {s.done ? <Check className="size-3.5" strokeWidth={3} /> : i + 1}
@@ -183,11 +183,11 @@ export function ActivationMap({
             <span className="min-w-0 flex-1">
               <span className="flex items-center gap-2 text-sm font-bold sm:text-base">
                 {s.title}
-                {s.id === next.id ? <Circle className="size-2 shrink-0 fill-coral text-coral" /> : null}
+                {s.id === next.id ? <span className="size-1.5 shrink-0 rounded-full bg-foreground" /> : null}
               </span>
               <span className="mt-1 block text-xs leading-relaxed text-ink-soft sm:text-sm">{s.lead}</span>
               {!s.done ? (
-                <Link to={s.to} className="mt-2 inline-block text-xs font-bold text-primary">
+                <Link to={s.to} className="mt-2 inline-block text-xs font-bold text-foreground underline underline-offset-4">
                   {s.cta} ←
                 </Link>
               ) : null}

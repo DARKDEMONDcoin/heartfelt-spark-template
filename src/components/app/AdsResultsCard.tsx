@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Megaphone } from "lucide-react";
-
 import { adsOverview } from "@/lib/ads-overview.functions";
 
 const fmt = (n: number, digits = 0) =>
@@ -29,41 +27,43 @@ export function AdsResultsCard({ workspaceId }: { workspaceId: string }) {
     { k: "نسبة النقر", v: `${fmt(data.ctr, 2)}%` },
     { k: "التحويلات", v: fmt(data.conversions) },
   ];
+  const maxSpend = Math.max(...data.campaigns.map((campaign) => campaign.spend), 1);
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5 shadow-card sm:p-6">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="grid size-8 place-items-center rounded-xl bg-primary/10 text-primary">
-          <Megaphone className="size-4" />
-        </span>
-        <h2 className="font-display text-base font-black sm:text-lg">نتائج إعلاناتك — آخر ٣٠ يوماً</h2>
-        <span className="ms-auto truncate text-xs text-muted-foreground">{data.account}</span>
+    <section className="ads-report">
+      <div className="ads-report-head">
+        <div>
+          <p>تقرير مباشر · آخر ٣٠ يوماً</p>
+          <h2>أداء الإعلانات</h2>
+        </div>
+        <span>{data.account}</span>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+      <div className="ads-report-metrics">
         {metrics.map((m) => (
-          <div key={m.k} className="rounded-2xl border border-border/70 p-3">
-            <p className="text-[0.7rem] text-muted-foreground">{m.k}</p>
-            <p className="mt-1 font-display text-lg font-black tabular-nums">{m.v}</p>
+          <div key={m.k}>
+            <p>{m.k}</p>
+            <strong>{m.v}</strong>
           </div>
         ))}
       </div>
 
       {data.conversions ? (
-        <p className="mt-3 text-xs text-ink-soft">
-          تكلفة التحويل الواحد: <b className="text-foreground">{fmt(cost, 2)} {data.currency}</b>
+        <p className="ads-report-cost">
+          تكلفة التحويل الواحد <b>{fmt(cost, 2)} {data.currency}</b>
         </p>
       ) : null}
 
-      <ul className="mt-4 space-y-2">
+      <div className="ads-report-label"><span>أعلى الحملات</span><span>الإنفاق / النقرات</span></div>
+      <ul className="ads-campaigns">
         {data.campaigns.map((c) => (
-          <li
-            key={c.name}
-            className="flex items-center gap-3 rounded-xl border border-border/60 px-3 py-2 text-sm"
-          >
-            <span className="min-w-0 flex-1 truncate font-semibold">{c.name}</span>
-            <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-              {fmt(c.spend)} {data.currency} · {fmt(c.clicks)} نقرة
+          <li key={c.name}>
+            <div className="ads-campaign-line">
+              <span>{c.name}</span>
+              <b>{fmt(c.spend)} {data.currency} · {fmt(c.clicks)}</b>
+            </div>
+            <span className="ads-campaign-track" aria-hidden="true">
+              <i style={{ width: `${Math.max(5, (c.spend / maxSpend) * 100)}%` }} />
             </span>
           </li>
         ))}
