@@ -14,6 +14,7 @@ import { useProfile, useWorkspace } from "@/lib/data";
 import { UserAvatar } from "@/components/app/UserAvatar";
 import { SiteFavicon } from "@/components/app/SiteBadge";
 import { cn } from "@/lib/utils";
+import defaultWorkspace from "@/assets/default-workspace.jpg";
 
 function WorkspaceCard() {
   const { data: workspace } = useWorkspace();
@@ -25,9 +26,14 @@ function WorkspaceCard() {
           <SiteFavicon website={website} className="size-full" />
         </span>
       ) : (
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-jade font-display text-sm font-black text-background">
-          {workspace?.initials ?? "سه"}
-        </span>
+        <img
+          src={defaultWorkspace}
+          alt="صورة مساحة العمل الافتراضية"
+          loading="lazy"
+          width={1024}
+          height={1024}
+          className="size-10 shrink-0 rounded-xl border border-border object-cover shadow-sm"
+        />
       )}
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-bold">{workspace?.name ?? "مساحة عملك"}</span>
@@ -55,11 +61,8 @@ function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
       <WorkspaceCard />
 
       <div className="min-h-0 flex-1">
-        <div className="mb-2 flex items-center justify-between px-2">
+        <div className="mb-2 px-2">
           <p className="text-[0.68rem] font-bold text-muted-foreground">الموظفون</p>
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[0.62rem] font-bold text-primary">
-            6 متاحون
-          </span>
         </div>
         <div className="space-y-1.5 overflow-y-auto">
           {team.map((m) => (

@@ -1,7 +1,8 @@
 import { useAvatarUrl } from "@/hooks/use-avatar";
 import { cn } from "@/lib/utils";
+import defaultUserAvatar from "@/assets/default-user-avatar.jpg";
 
-/** صورة المستخدم أينما ظهر حسابه — تعود للحرف الأول إن لم يرفع صورة. */
+/** صورة المستخدم أينما ظهر حسابه — تعود للصورة الافتراضية إن لم يرفع صورة. */
 export function UserAvatar({
   className,
   fallbackClassName,
@@ -10,27 +11,18 @@ export function UserAvatar({
   fallbackClassName?: string;
 }) {
   const { url, name } = useAvatarUrl();
-  const initial = (name ?? "ع").trim().charAt(0) || "ع";
-
-  if (url) {
-    return (
-      <img
-        src={url}
-        alt={`صورة ${name ?? "المستخدم"}`}
-        className={cn("size-full rounded-[inherit] object-cover", className)}
-      />
-    );
-  }
-
   return (
-    <span
+    <img
+      src={url ?? defaultUserAvatar}
+      alt={url ? `صورة ${name ?? "المستخدم"}` : "الصورة الافتراضية للمستخدم"}
+      loading="lazy"
+      width={1024}
+      height={1024}
       className={cn(
-        "grid size-full place-items-center rounded-[inherit] bg-foreground font-display text-sm font-black text-background",
-        fallbackClassName,
+        "size-full rounded-[inherit] object-cover",
+        !url && fallbackClassName,
         className,
       )}
-    >
-      {initial}
-    </span>
+    />
   );
 }

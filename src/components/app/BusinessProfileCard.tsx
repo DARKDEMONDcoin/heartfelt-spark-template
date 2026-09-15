@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Globe, Loader2, Sparkles, RefreshCw, MapPin, Users, Store, Swords, Link2, ArrowUpLeft } from "lucide-react";
+import { Loader2, Sparkles, RefreshCw, MapPin, Users, Store, Swords, Link2, ArrowUpLeft } from "lucide-react";
 
 import { AppIcon, appLabel } from "@/components/site/AppIcon";
 import { getMember } from "@/data/team";
@@ -11,6 +11,7 @@ import { profileMyWebsite } from "@/lib/business-profile.functions";
 import { cn } from "@/lib/utils";
 import { Portrait } from "@/components/site/Portrait";
 import { SiteFavicon } from "@/components/app/SiteBadge";
+import defaultWorkspace from "@/assets/default-workspace.jpg";
 
 type Props = {
   workspaceId: string;
@@ -50,7 +51,16 @@ export function BusinessProfileCard({ workspaceId, website, profile, onProfiled,
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-2xl bg-jade/12 text-jade-deep">
-            {savedSite ? <SiteFavicon website={savedSite} className="size-6" /> : <Globe className="size-5" />}
+            {savedSite ? <SiteFavicon website={savedSite} className="size-6" /> : (
+              <img
+                src={defaultWorkspace}
+                alt="صورة مساحة العمل الافتراضية"
+                loading="lazy"
+                width={1024}
+                height={1024}
+                className="size-full object-cover"
+              />
+            )}
           </span>
           <div className="min-w-0">
             <h2 className="font-display text-base font-black sm:text-lg">ملف العلامة من موقعك</h2>
