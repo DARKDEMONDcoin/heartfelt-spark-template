@@ -85,6 +85,10 @@ function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
           ))}
         </div>
       </div>
+      <Link to="/pricing" onClick={onNavigate} className="app-sidebar-pricing">
+        <span><small>الخطط والسعة</small><b>عرض الأسعار</b></span>
+        <i aria-hidden="true">←</i>
+      </Link>
     </div>
   );
 }
