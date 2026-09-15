@@ -14933,7 +14933,7 @@ section:has(> .integration-grid-wave) {
   .sauth-glow-blob.is-two, .sauth-glow-blob.is-three { background: radial-gradient(closest-side, #2F6B63, transparent 70%); }
 }
 
-.sauth-topbar { position: relative; z-index: 1; padding: 22px 26px; display: flex; justify-content: flex-end; }
+.sauth-topbar { position: absolute; top: 0; left: 0; z-index: 2; padding: 22px 26px; }
 .sauth-logo { display: inline-flex; align-items: center; color: #A8492C; }
 
 .sauth-center {
