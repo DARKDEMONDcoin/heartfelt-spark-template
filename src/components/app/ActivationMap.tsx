@@ -31,7 +31,13 @@ type Step = {
  * خريطة التفعيل: ترتيب حقيقي لما يجب أن يفعله صاحب العمل بعد التسجيل،
  * كل خطوة محسوبة من بيانات مساحة العمل الفعلية لا من قائمة ثابتة.
  */
-export function ActivationMap({ className }: { className?: string }) {
+export function ActivationMap({
+  className,
+  variant = "full",
+}: {
+  className?: string;
+  variant?: "full" | "compact";
+}) {
   const { data: workspace } = useWorkspace();
   const { data: accounts } = useConnectedAccounts(workspace?.id);
   const { data: tasks } = useTasks(workspace?.id);
@@ -103,6 +109,29 @@ export function ActivationMap({ className }: { className?: string }) {
   const next = steps.find((s) => !s.done)!;
 
   const pct = Math.round((doneCount / steps.length) * 100);
+
+  if (variant === "compact") {
+    return (
+      <Link
+        to={next.to}
+        className={cn(
+          "flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-card transition-colors hover:bg-secondary/40",
+          className,
+        )}
+      >
+        <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-secondary text-[0.72rem] font-black tabular-nums">
+          {doneCount}/{steps.length}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-sm font-bold">الخطوة التالية: {next.title}</span>
+          <span className="mt-0.5 block truncate text-xs text-muted-foreground">{next.lead}</span>
+        </span>
+        <span className="inline-flex shrink-0 items-center gap-1 text-xs font-bold text-primary">
+          {next.cta} <ArrowLeft className="size-3.5" />
+        </span>
+      </Link>
+    );
+  }
 
   return (
     <section className={cn("overflow-hidden rounded-3xl border border-border bg-card shadow-card", className)}>
