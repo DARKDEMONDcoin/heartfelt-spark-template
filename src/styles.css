@@ -15460,3 +15460,10 @@ html { scroll-padding-top: 96px; }
   .sahl-device-frame.is-hero.sahl-device-drop { transform: translate3d(0,-64px,0) scale(.965); }
   .sahl-device-frame.is-hero.sahl-device-drop.is-landed { transform: none; }
 }
+
+.sahl-proof-visual img { max-height: 380px; object-fit: cover; object-position: center; }
+.sahl-ads-visual img { max-height: 360px; object-fit: cover; object-position: center; }
+@media (max-width: 720px) {
+  .sahl-proof-visual img { max-height: 220px; }
+  .sahl-ads-visual img { max-height: 200px; }
+}
