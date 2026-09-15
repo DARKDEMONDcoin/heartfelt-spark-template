@@ -15270,3 +15270,4 @@ section:has(> .integration-grid-wave) {
   .sahl-cap-card a { margin-top: 16px; font-size: .76rem; }
   .sahl-cap-card .sahl-device-frame, .sahl-cap-card.is-wide .sahl-device-frame { width: min(58%,196px); margin: 16px auto 20px; }
 }
+.sahl-pricing .sahl-section-head p a { color: var(--home-terracotta); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
