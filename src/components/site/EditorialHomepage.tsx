@@ -9,39 +9,39 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { plans } from "@/data/pricing";
 import { stories } from "@/data/stories";
-import ecommerceSector from "@/assets/sectors/ecommerce.jpg.asset.json";
-import restaurantsSector from "@/assets/sectors/restaurants.jpg.asset.json";
-import clinicsSector from "@/assets/sectors/clinics.jpg.asset.json";
-import realestateSector from "@/assets/sectors/realestate.jpg.asset.json";
-import sonnyDesktop from "@/assets/employee-screens-v2/sonny-desktop.png.asset.json";
-import sonnyMobile from "@/assets/employee-screens-v2/sonny-mobile.png.asset.json";
-import evaDesktop from "@/assets/employee-screens-v2/eva-desktop.png.asset.json";
-import evaMobile from "@/assets/employee-screens-v2/eva-mobile.png.asset.json";
-import samDesktop from "@/assets/employee-screens-v2/sam-desktop.png.asset.json";
-import samMobile from "@/assets/employee-screens-v2/sam-mobile.png.asset.json";
-import nourDesktop from "@/assets/employee-screens-v2/nour-desktop.png.asset.json";
-import nourMobile from "@/assets/employee-screens-v2/nour-mobile.png.asset.json";
-import danaDesktop from "@/assets/employee-screens-v2/dana-desktop.png.asset.json";
-import danaMobile from "@/assets/employee-screens-v2/dana-mobile.png.asset.json";
-import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png.asset.json";
-import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png.asset.json";
+import ecommerceSector from "@/assets/sectors/ecommerce.jpg";
+import restaurantsSector from "@/assets/sectors/restaurants.jpg";
+import clinicsSector from "@/assets/sectors/clinics.jpg";
+import realestateSector from "@/assets/sectors/realestate.jpg";
+import sonnyDesktop from "@/assets/employee-screens-v2/sonny-desktop.png";
+import sonnyMobile from "@/assets/employee-screens-v2/sonny-mobile.png";
+import evaDesktop from "@/assets/employee-screens-v2/eva-desktop.png";
+import evaMobile from "@/assets/employee-screens-v2/eva-mobile.png";
+import samDesktop from "@/assets/employee-screens-v2/sam-desktop.png";
+import samMobile from "@/assets/employee-screens-v2/sam-mobile.png";
+import nourDesktop from "@/assets/employee-screens-v2/nour-desktop.png";
+import nourMobile from "@/assets/employee-screens-v2/nour-mobile.png";
+import danaDesktop from "@/assets/employee-screens-v2/dana-desktop.png";
+import danaMobile from "@/assets/employee-screens-v2/dana-mobile.png";
+import adamDesktop from "@/assets/employee-screens-v2/adam-desktop.png";
+import adamMobile from "@/assets/employee-screens-v2/adam-mobile.png";
 
 type DemoPhase = "idle" | "thinking" | "draft" | "approved";
 
 const capabilities = [
-  { icon: MessageSquareText, kicker: "سِراج · السوشيال ميديا", title: "من طلب واحد إلى حملة جاهزة للاعتماد.", body: "يبني خطة ٣٠ يومًا، يكتب كل نسخة، ينسّق التصميم والنشر، ثم يعيد أفضل الأفكار إلى التقويم.", image: sonnyDesktop.url, mobileImage: sonnyMobile.url, tone: "terracotta", span: "wide" },
-  { icon: CalendarCheck2, kicker: "أمَل · المساعدة التنفيذية", title: "ساعتك القادمة واضحة قبل أن تبدأ.", body: "تفرز البريد، ترتب الاجتماعات، وتضع القرارات المعلّقة في ملخص صباحي واحد.", image: evaDesktop.url, mobileImage: evaMobile.url, tone: "gold", span: "standard" },
-  { icon: BarChart3, kicker: "سالم · المبيعات", title: "كل فرصة لها رسالة وخطوة تالية.", body: "يبحث عن العميل المناسب، يخصص التواصل، ويسلمك الفرص الجاهزة للمكالمة.", image: samDesktop.url, mobileImage: samMobile.url, tone: "teal", span: "standard" },
-  { icon: SearchCheck, kicker: "نور · المحتوى والسيو", title: "إجابة عربية يجدها عميلك وقت البحث.", body: "ترصد السؤال، تبني خطة موضوعات، وتكتب صفحات أصلية مرتبطة بما يطلبه السوق.", image: nourDesktop.url, mobileImage: nourMobile.url, tone: "terracotta", span: "wide" },
-  { icon: Sparkles, kicker: "دانة · التصميم", title: "فكرة واحدة، وكل المقاسات جاهزة.", body: "تحول المسودة إلى نظام بصري متسق، ثم تجهز نسخ كل منصة للمراجعة.", image: danaDesktop.url, mobileImage: danaMobile.url, tone: "teal", span: "standard" },
-  { icon: BrainCircuit, kicker: "آدم · تحليل البيانات", title: "التقرير ينتهي بقرار، لا برقم.", body: "يجمع أداء القنوات، يرصد التغير، ويحدد أين تتحرك الميزانية والجهد بعد ذلك.", image: adamDesktop.url, mobileImage: adamMobile.url, tone: "gold", span: "standard" },
+  { icon: MessageSquareText, kicker: "سِراج · السوشيال ميديا", title: "من طلب واحد إلى حملة جاهزة للاعتماد.", body: "يبني خطة ٣٠ يومًا، يكتب كل نسخة، ينسّق التصميم والنشر، ثم يعيد أفضل الأفكار إلى التقويم.", image: sonnyDesktop, mobileImage: sonnyMobile, tone: "terracotta", span: "wide" },
+  { icon: CalendarCheck2, kicker: "أمَل · المساعدة التنفيذية", title: "ساعتك القادمة واضحة قبل أن تبدأ.", body: "تفرز البريد، ترتب الاجتماعات، وتضع القرارات المعلّقة في ملخص صباحي واحد.", image: evaDesktop, mobileImage: evaMobile, tone: "gold", span: "standard" },
+  { icon: BarChart3, kicker: "سالم · المبيعات", title: "كل فرصة لها رسالة وخطوة تالية.", body: "يبحث عن العميل المناسب، يخصص التواصل، ويسلمك الفرص الجاهزة للمكالمة.", image: samDesktop, mobileImage: samMobile, tone: "teal", span: "standard" },
+  { icon: SearchCheck, kicker: "نور · المحتوى والسيو", title: "إجابة عربية يجدها عميلك وقت البحث.", body: "ترصد السؤال، تبني خطة موضوعات، وتكتب صفحات أصلية مرتبطة بما يطلبه السوق.", image: nourDesktop, mobileImage: nourMobile, tone: "terracotta", span: "wide" },
+  { icon: Sparkles, kicker: "دانة · التصميم", title: "فكرة واحدة، وكل المقاسات جاهزة.", body: "تحول المسودة إلى نظام بصري متسق، ثم تجهز نسخ كل منصة للمراجعة.", image: danaDesktop, mobileImage: danaMobile, tone: "teal", span: "standard" },
+  { icon: BrainCircuit, kicker: "آدم · تحليل البيانات", title: "التقرير ينتهي بقرار، لا برقم.", body: "يجمع أداء القنوات، يرصد التغير، ويحدد أين تتحرك الميزانية والجهد بعد ذلك.", image: adamDesktop, mobileImage: adamMobile, tone: "gold", span: "standard" },
 ] as const;
 
 const sectors = [
-  { id: "ecommerce", label: "المتاجر", title: "الحملة تبدأ بالمحتوى وتنتهي بقرار شراء.", body: "سِراج يطلق القصة، دانة تجهز المقاسات، سالم يتابع المهتمين، وآدم يوضح ما يستحق التكرار.", stat: "٦ أدوار متصلة", image: ecommerceSector.url, task: "إطلاق مجموعة الخريف", result: "١٢ مادة للمراجعة", signal: "٤ قنوات جاهزة", icon: "◫" },
-  { id: "restaurants", label: "المطاعم", title: "عرض اليوم لا ينتظر اجتماع الأسبوع.", body: "أمَل ترتب الموعد، سِراج يجهز النشر، دانة تصمم العرض، والفريق يتابع الرسائل في مسار واحد.", stat: "من الطلب للنشر", image: restaurantsSector.url, task: "قائمة نهاية الأسبوع", result: "موعد النشر ٦:٣٠", signal: "٣ مواد جاهزة", icon: "✦" },
-  { id: "clinics", label: "العيادات", title: "معلومة دقيقة تمر بالمراجعة قبل جمهورك.", body: "نور تكتب المادة، دانة توضحها بصريًا، وأمَل توقف أي مادة حساسة حتى تصل موافقتك.", stat: "مراجعة بشرية", image: clinicsSector.url, task: "سلسلة التوعية الشهرية", result: "بانتظار موافقتك", signal: "٦ موضوعات", icon: "+" },
-  { id: "realestate", label: "العقار", title: "الإعلان والمتابعة والتقرير في سياق واحد.", body: "سِراج يقدم العقار، سالم يتابع المهتمين، وآدم يلخص القنوات التي جلبت فرصًا جادة.", stat: "فريق واحد", image: realestateSector.url, task: "إطلاق عقار جديد", result: "قائمة المتابعة جاهزة", signal: "٥ مواعيد", icon: "⌂" },
+  { id: "ecommerce", label: "المتاجر", title: "الحملة تبدأ بالمحتوى وتنتهي بقرار شراء.", body: "سِراج يطلق القصة، دانة تجهز المقاسات، سالم يتابع المهتمين، وآدم يوضح ما يستحق التكرار.", stat: "٦ أدوار متصلة", image: ecommerceSector, task: "إطلاق مجموعة الخريف", result: "١٢ مادة للمراجعة", signal: "٤ قنوات جاهزة", icon: "◫" },
+  { id: "restaurants", label: "المطاعم", title: "عرض اليوم لا ينتظر اجتماع الأسبوع.", body: "أمَل ترتب الموعد، سِراج يجهز النشر، دانة تصمم العرض، والفريق يتابع الرسائل في مسار واحد.", stat: "من الطلب للنشر", image: restaurantsSector, task: "قائمة نهاية الأسبوع", result: "موعد النشر ٦:٣٠", signal: "٣ مواد جاهزة", icon: "✦" },
+  { id: "clinics", label: "العيادات", title: "معلومة دقيقة تمر بالمراجعة قبل جمهورك.", body: "نور تكتب المادة، دانة توضحها بصريًا، وأمَل توقف أي مادة حساسة حتى تصل موافقتك.", stat: "مراجعة بشرية", image: clinicsSector, task: "سلسلة التوعية الشهرية", result: "بانتظار موافقتك", signal: "٦ موضوعات", icon: "+" },
+  { id: "realestate", label: "العقار", title: "الإعلان والمتابعة والتقرير في سياق واحد.", body: "سِراج يقدم العقار، سالم يتابع المهتمين، وآدم يلخص القنوات التي جلبت فرصًا جادة.", stat: "فريق واحد", image: realestateSector, task: "إطلاق عقار جديد", result: "قائمة المتابعة جاهزة", signal: "٥ مواعيد", icon: "⌂" },
 ] as const;
 
 const stats = [
